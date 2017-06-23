@@ -1,0 +1,35 @@
+# This file is a "template" of what your parameters.yml file should look like
+# Set parameters here that may be different on each deployment target of the app, e.g. development, staging, production.
+# http://symfony.com/doc/current/best_practices/configuration.html#infrastructure-related-configuration
+parameters:
+    database_host:     192.168.33.2
+    database_port:     3302
+    database_name:     agile_skeleton
+    database_user:     root
+    database_password: 1234
+
+
+    mailer_transport:  smtp
+    mailer_host:       in-v3.mailjet.com
+    mailer_user:       ~
+    mailer_password:   ~
+    mailer_port:       ~
+
+    session_prefix:    agile-skeleton
+
+    secret:            ThisTokenIsNotSoSecretChangeIt
+
+    session_path:           "%kernel.root_dir%/../var/sessions/%kernel.environment%"
+
+    no_reply_email:    corentin.regnier59@gmail.com
+    no_reply_sender:    Agile Skeleton
+    agile_host_env: dev
+    agile_project_domain: agile-skeleton.sf
+    agile_project_url: https://agile-skeleton.sf/
+    agile_project_name: agile-skeleton
+    agile_project_title: Agile Skeleton
+    agile_email_sender_name: Agile Skeleton
+    agile_developer_email: corentin.regnier59@gmail.com
+    agile_contact_email:    corentin.regnier59@gmail.com
+    agile_vagrant_smb_user:
+    agile_vagrant_smb_password:

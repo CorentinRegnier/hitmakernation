@@ -1,0 +1,6 @@
+assets:
+    js:
+        app:
+            - jquery-1.11.3.min.js
+            - bootstrap.min.js
+            - app.js

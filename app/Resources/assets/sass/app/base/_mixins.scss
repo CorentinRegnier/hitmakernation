@@ -1,0 +1,138 @@
+/*
+   Functions
+   ========================================================================== */
+
+@function image-url($string) {
+    @return url('#{$img-path}#{$string}');
+}
+
+/*
+   Placeholders
+   ========================================================================== */
+
+%raleway {
+    font-family: $font-family-raleway;
+}
+
+%open-sans {
+    font-family: $font-family-open-sans;
+}
+
+%font-light {
+    font-weight: 300;
+}
+
+%font-regular {
+    font-weight: 400;
+}
+
+%font-medium {
+    font-weight: 500;
+}
+
+%font-bold {
+    font-weight: 700;
+}
+
+%font-black {
+    font-weight: 900;
+}
+
+%italic {
+    font-style: italic;
+}
+
+/*
+   Mixins
+   ========================================================================== */
+
+//== Fonts
+@mixin font($font-placeholder, $font-family, $font-weight, $font-style:false) {
+
+    $style: if($font-style, str-slice($font-style, 1, 1), '');
+    $weight: if($font-weight != regular, str-slice($font-weight, 1, 1), '');
+    $weight-style: if($style != '' or $weight != '', '-', '');
+    $pattern: #{$weight-style}#{$weight}#{$style};
+
+    //@warn ($weight-style);
+
+    .#{$font-placeholder}#{$pattern} {
+        @extend %#{$font-placeholder} !optional;
+        @extend %font-#{$font-weight} !optional;
+
+        @if ($font-style == italic) {
+            @extend %italic !optional;
+        }
+    }
+}
+
+//== Block helpers
+@mixin loop-block-spaces($property, $integer, $direction:false) {
+
+    $p: str-slice($property, 1, 1);
+    $d: if($direction != false, str-slice($direction, 1, 1), '');
+    $full-patern: #{$p}#{$d};
+    $class: if($direction != false, $full-patern, $p);
+    $the-property: if($direction != false, $property +'-'+ $direction, $property);
+
+    .#{$class}-0 {
+        #{$the-property}: 0 !important;
+    }
+
+    @while $integer > 0 {
+
+        .#{$class}-#{$integer} {
+            #{$the-property}: #{$integer}px !important;
+        }
+        $integer: if($integer == 0, 0, $integer - 5);
+    }
+}
+
+//== Outline buttons
+@mixin button-outline-variant($color) {
+    color: $color;
+    background-image: none;
+    background-color: #fff;
+    border-color: $color;
+
+    &:hover {
+        color: #fff;
+        background-color: $color;
+        border-color: $color;
+    }
+
+    &:focus,
+    &.focus {
+        color: #fff;
+        background-color: $color;
+        border-color: $color;
+    }
+
+    &:active,
+    &.active,
+    .open > &.dropdown-toggle {
+        color: #fff;
+        background-color: $color;
+        border-color: $color;
+
+        &:hover,
+        &:focus,
+        &.focus {
+            color: #fff;
+            background-color: darken($color, 17%);
+            border-color: darken($color, 25%);
+        }
+    }
+
+    &.disabled,
+    &:disabled {
+
+        &:focus,
+        &.focus {
+            border-color: lighten($color, 20%);
+        }
+        &:hover {
+            border-color: lighten($color, 20%);
+        }
+    }
+}

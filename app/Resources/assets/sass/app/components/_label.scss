@@ -1,0 +1,9 @@
+/**
+    Label
+ */
+
+/** Définir les champs obligatoire */
+.required:after {
+    content: " *";
+    color: $brand-danger;
+}
