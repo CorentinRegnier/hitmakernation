@@ -63,5 +63,6 @@ Vagrant.configure(2) do |config|
   config.vm.provision "file", source: "./deploy/apache/ssl/project.key", destination: "/var/www/project.key"
   config.vm.provision "file", source: "./deploy/phpmyadmin/config.inc.php", destination: "/var/www/config.inc.php"
   config.vm.provision "file", source: "./deploy/phpmyadmin/apache.conf", destination: "/var/www/apache.conf"
+  config.vm.provision "file", source: "./deploy/rabbitmq/rabbitmq.config", destination: "/var/www/rabbitmq.config"
   config.vm.provision "shell", path: "./deploy/script.sh", args: [ip, name, url, '1234']
 end

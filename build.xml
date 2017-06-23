@@ -1,10 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project name="agile-skeleton" default="help" basedir=".">
+<project name="agile_skeleton" default="help" basedir=".">
+
+    <property name="crondir" value="${project.basedir}/app/cron"/>
+
     <target name="help" description="show help">
         <exec command="vendor/bin/phing -l" passthru="true"/>
     </target>
 
+    <target name="cron">
+        <echo msg="Creating cron for ${env} environment. Looking in ${crondir}"/>
+        <exec command="crontab -r" logoutput="true"/>
+        <copy todir="${project.basedir}/app/cache/cron/">
+            <filterchain>
+                <replacetokens begintoken="__" endtoken="__">
+                    <token key="ENV" value="${env}"/>
+                    <token key="BASEDIR" value="${project.basedir}"/>
+                </replacetokens>
+            </filterchain>
+            <fileset dir="${crondir}">
+                <include name="${env}"/>
+            </fileset>
+        </copy>
+        <exec command="crontab ${project.basedir}/app/cache/cron/${env}" logoutput="true"/>
+        <exec command="rm ${project.basedir}/app/cache/cron/${env}" logoutput="true"/>
+    </target>
     <target name="update:preprod" description="Update project on preprod">
         <property name="env" value="prod" override="true"/>
 
@@ -20,6 +40,8 @@
         <exec command="php bin/console doctrine:schema:update --force -e=prod" passthru="true"/>
         <echo message="Disable index..."/>
         <exec command="echo 'User-agent: *${line.separator}Disallow: /' > web/robots.txt" passthru="true"/>
+        <echo message="Load fixtures..."/>
+        <exec command="php bin/console doctrine:fixtures:load" passthru="true" checkreturn="true"/>
     </target>
 
     <target name="update:dev" description="Update project in dev">
@@ -40,13 +62,23 @@
     </target>
 
     <target name="remote:update:preprod" description="Remotely update the preprod">
-        <exec
-                command="ssh agile-skeleton@151.80.43.132 'cd site; vendor/bin/phing update:preprod'" passthru="true"
-                checkreturn="true"/>
+        <exec command="ssh agile_skeleton@151.80.43.132 'cd site; vendor/bin/phing update:preprod'" passthru="true"
+              checkreturn="true"/>
+    </target>
+
+    <target name="tests:valid"
+            description="Check security and schema database validation">
+        <exec command="vendor/bin/phing tests:schema-validate; vendor/bin/phing tests:security_check" checkreturn="true"
+              logoutput="true"/>
     </target>
 
     <target name="tests:schema-validate"
             description="Validate that the database schema is in sync with the entity classes">
         <exec command="php bin/console doctrine:schema:validate" checkreturn="true" logoutput="true"/>
+    </target>
+
+    <target name="tests:security_check"
+            description="Check for Known Security Vulnerabilities in Your Dependencies">
+        <exec command="php bin/console security:check" checkreturn="true" logoutput="true"/>
     </target>
 </project>
