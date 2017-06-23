@@ -161,8 +161,7 @@ edit next files :
     # sudo apt-get -y install elasticsearch
     # sudo echo "network.bind_host: 0" >> /etc/elasticsearch/elasticsearch.yml
     # sudo echo "network.host: 0.0.0.0" >> /etc/elasticsearch/elasticsearch.yml
-    # sudo echo "http.port: 9202" >> /etc/elasticsearch/elasticsearch.yml # if you use elastic search uncomment java 
-    and elasticsearch installation and set the port as you want
+    # sudo echo "http.port: 9202" >> /etc/elasticsearch/elasticsearch.yml # if you use elastic search uncomment java and elasticsearch installation and set the port as you want
     # sudo service elasticsearch restart
     # sudo update-rc.d elasticsearch defaults 95 10
 
