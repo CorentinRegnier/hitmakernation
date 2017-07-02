@@ -1,4 +1,4 @@
-## IMMO (SYMFONY 3)
+## AGILE SKELETON (SYMFONY 3)
 ### Installattion
 
 - $ git clone git@github.com:MWCorentin/Agile-Skeleton.git
