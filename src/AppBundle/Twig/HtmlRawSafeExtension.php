@@ -22,7 +22,7 @@ class HtmlRawSafeExtension extends \Twig_Extension
     public function getFilters()
     {
         return [
-            new \Twig_SimpleFilter('html_raw', [$this, 'html'], ['is_safe' => ['htmlRaw']]),
+            new \Twig_SimpleFilter('html_raw', [$this, 'htmlRaw'], ['is_safe' => ['html']]),
         ];
     }
 

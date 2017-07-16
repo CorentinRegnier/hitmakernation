@@ -119,14 +119,6 @@ class User extends BaseUser
     protected $slug;
 
     /**
-     * @var Property[]|ArrayCollection
-     *
-     * @ORM\OneToMany(targetEntity="Property", mappedBy="user")
-     * @ORM\JoinColumn(onDelete="SET NULL")
-     */
-    protected $properties;
-
-    /**
      * User constructor.
      */
     public function __construct()
@@ -353,26 +345,6 @@ class User extends BaseUser
     }
 
     /**
-     * @return Property[]|ArrayCollection
-     */
-    public function getProperties()
-    {
-        return $this->properties;
-    }
-
-    /**
-     * @param Property[]|ArrayCollection $properties
-     *
-     * @return User
-     */
-    public function setProperties($properties)
-    {
-        $this->properties = $properties;
-
-        return $this;
-    }
-
-    /**
      * @return string
      */
     public function getFullName()
@@ -410,8 +382,8 @@ class User extends BaseUser
     public static function getAvailableRoles()
     {
         return [
-            'admin.role.ROLE_SUPER_ADMIN'   => self::USER_ROLE_SUPER_ADMIN,
-            'admin.role.ROLE_USER' => self::USER_ROLE_USER,
+            'admin.role.ROLE_SUPER_ADMIN' => self::USER_ROLE_SUPER_ADMIN,
+            'admin.role.ROLE_USER'        => self::USER_ROLE_USER,
         ];
     }
 }

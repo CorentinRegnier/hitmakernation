@@ -25,289 +25,63 @@
     {% endblock %}
 
 </head>
-<body class="page-template-default page page-id-576 pmpro-body-has-access">
+<body {% block body_class %}class="page-template-default page page-id-576 pmpro-body-has-access"{% endblock body_class %}>
 
-<div id="kopa-page-header">
+{% block header %}
+    {% include 'app/common/_header.html.twig' %}
+{% endblock header %}
 
-
-    <div id="kopa-header-top">
-
-        <div class="outer clearfix">
-
-            <div id="logo-image" class="pull-left">
-                <a href="https://hitmakernation.com"><img
-                            src="https://hitmakernation.com/wp-content/uploads/2017/05/HMN-Transparent.png"
-                            alt="HitMakerNation"></a>
-            </div>
-
-            <div id="kopa-header-top-inner" class="pull-left">
-
-                <div class="clearfix">
-
-                    <div class="left-col pull-left line-divider clearfix">
-                        <ul class="social-links pull-right clearfix">
-                            <li>
-                                <a href="https://www.facebook.com/HitMakerNation/" target="_blank" title="Facebook"
-                                   class="fa fa-facebook"></a>
-                            </li>
-                            <li>
-                                <a href="https://twitter.com/HitMakerNation" target="_blank" title="Twitter"
-                                   class="fa fa-twitter">
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://www.youtube.com/channel/UCb99Tach_Xwb0sp75O_fI5A?sub_confirmation=1"
-                                   target="_blank" title="YouTube" class="fa fa-youtube"></a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="right-col line-divider pull-left">
-
-                        <a class="signin-button" href="{{ path('') }}">Sign in</a>
-                        <a class="reg-button" href="https://hitmakernation.com/register">Register</a>
-                    </div>
-                </div>
-                <div class="clearfix">
-                    <div class="left-col pull-left clearfix">
-                        <div class="search-box clearfix">
-                            <form action="https://hitmakernation.com/" class="search-form pull-left clearfix"
-                                  method="get" _lpchecked="1">
-                                <input placeholder="Search..." type="text" value="" name="s" id="s" class="search-text">
-                                <button type="submit" class="search-submit"><i class="fa fa-search"></i></button>
-                            </form>
+{% block body %}
+    <main id="main"{% block main_class %}{% endblock main_class %}>
+        {% block full_container %}
+            <div id="main-content">
+                {# Block du template avant le contenant #}
+                {% block container_before %}
+                    <div class="page-header text-center">
+                        <div class="mask"></div>
+                        <div class="page-header-bg-1 page-header-bg"></div>
+                        <div class="page-header-inner page-header-inner-1">
+                            <div class="wrapper">
+                                <h1 class="page-title">
+                                    {% block page_title %}{% endblock %}
+                                </h1>
+                                {% block breadcrumb %}
+                                    {{ knp_menu_render('AppBundle:AppBuilder:breadcrumb', {'template':'app/common/_breadcrumb.html.twig','currentClass': 'active'}) }}
+                                {% endblock breadcrumb %}
+                            </div>
                         </div>
                     </div>
-                    <div class="right-col pull-left">
-                        <a class="shopping-cart-button clearfix" href="https://hitmakernation.com/cart">
-                            <i class="fa fa-shopping-cart pull-left"></i>
-                            <span class="pull-left">
-											0 items - <span class="woocommerce-Price-amount amount">0,00<span
-                                            class="woocommerce-Price-currencySymbol">€</span></span>										</span>
-                        </a>
+                {% endblock container_before %}
+                {% block container %}
+                    <div class="wrapper clearfix">
+                        <section class="elements-box">
+                            {% block content %}
+                            {% endblock %}
+                        </section>
                     </div>
-                </div>
+                {% endblock container %}
+                {# Block du template après le contenant #}
+                {% block container_after %}{% endblock container_after %}
             </div>
-        </div>
-    </div>
-    <div id="kopa-header-bottom">
-        <div class="outer clearfix">
-            <nav id="main-nav">
-                <ul id="main-menu" class="clearfix sf-js-enabled sf-arrows">
-                    <li id="menu-item-458"
-                        class="menu-item menu-item-type-custom menu-item-object-custom menu-item-458"><a
-                                href="https://hitmakernation.com/artist">Artists</a></li>
-                    <li id="menu-item-455"
-                        class="menu-item menu-item-type-post_type menu-item-object-page menu-item-455"><a
-                                href="https://hitmakernation.com/account">Account</a></li>
-                    <li id="menu-item-456"
-                        class="menu-item menu-item-type-post_type menu-item-object-page menu-item-456"><a
-                                href="https://hitmakernation.com/shop">Shop</a></li>
-                    <li id="menu-item-457"
-                        class="menu-item menu-item-type-post_type menu-item-object-page menu-item-457"><a
-                                href="https://hitmakernation.com/gallery">Gallery</a></li>
-                </ul>
-                <i class="fa fa-align-justify"></i>
-                <div class="mobile-menu-wrapper">
-                    <ul id="mobile-menu" class="menu">
-                        <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-458"><a
-                                    href="https://hitmakernation.com/artist">Artists</a></li>
-                        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-455"><a
-                                    href="https://hitmakernation.com/account">Account</a></li>
-                        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-456"><a
-                                    href="https://hitmakernation.com/shop">Shop</a></li>
-                        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-457"><a
-                                    href="https://hitmakernation.com/gallery">Gallery</a></li>
-                    </ul>
-                </div>
-            </nav>
-        </div>
-    </div>
-</div>
-<div id="main-content">
-    <header class="page-header text-center">
-        <div class="mask"></div>
-        <div class="page-header-bg-1 page-header-bg"></div>
-        <div class="page-header-inner page-header-inner-1">
+        {% endblock  full_container %}
+    </main>
+{% endblock body %}
 
-            <div class="wrapper">
+{# Block du template de l'entête de page #}
+{% block footer %}
+    {% include 'app/common/_footer.html.twig' %}
+{% endblock %}
 
+{# Block pour les librairies javascript externe#}
+{% block script_lib %}{% endblock script_lib %}
 
-                <h1 class="page-title">Se connecter</h1>
+{# Block pour la librairie du thème javascript #}
+{% block current_script %}
+    <script src="{{ asset('js/app.min.js') }}"></script>
+{% endblock %}
 
-                <div class="breadcrumb clearfix"><span itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb"><a
-                                itemprop="url" href="https://hitmakernation.com"><span itemprop="title">Home</span></a></span><span>&nbsp;/&nbsp;</span><span
-                            itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb"><a itemprop="url"
-                                                                                             class="current-page"><span
-                                    itemprop="title">Se connecter</span></a></span></div>
-                <!-- breadcrumb -->
+{# Block du js d'une vue en particulier #}
+{% block view_js %}{% endblock view_js %}
 
-            </div>
-            <!-- wrapper -->
-
-        </div>
-        <!-- page-header-inner -->
-
-    </header>
-    <!-- page-header -->
-
-    <div class="wrapper clearfix">
-        <section class="elements-box">
-
-            <div class="tml tml-login" id="theme-my-login">
-                <form name="loginform" id="loginform" action="/login" method="post">
-                    <p class="tml-user-login-wrap">
-                        <label for="user_login">Nom d’utilisateur ou e-mail</label>
-                        <input type="text" name="log" id="user_login" class="input" value="" size="20">
-                    </p>
-
-                    <p class="tml-user-pass-wrap">
-                        <label for="user_pass">Mot de passe</label>
-                        <input type="password" name="pwd" id="user_pass" class="input" value="" size="20"
-                               autocomplete="off">
-                    </p>
-
-
-                    <div class="tml-rememberme-submit-wrap">
-                        <p class="tml-rememberme-wrap">
-                            <input name="rememberme" type="checkbox" id="rememberme" value="forever">
-                            <label for="rememberme">Se souvenir de moi</label>
-                        </p>
-
-                        <p class="tml-submit-wrap">
-                            <input type="submit" name="wp-submit" id="wp-submit" value="Se connecter">
-                            <input type="hidden" name="redirect_to" value="https://hitmakernation.com/wp-admin/">
-                            <input type="hidden" name="instance" value="">
-                            <input type="hidden" name="action" value="login">
-                        </p>
-                    </div>
-                </form>
-                <ul class="tml-action-links">
-                    <li><a href="https://hitmakernation.com/register" rel="nofollow">S’enregistrer</a></li>
-                    <li><a href="https://hitmakernation.com/lostpassword" rel="nofollow">Mot de passe perdu</a></li>
-                </ul>
-            </div>
-
-
-            <!-- page-links-wrapper -->
-
-            <!-- tag-box -->
-
-        </section>
-        <!-- entry-box -->
-
-
-    </div>
-    <!-- wrapper -->
-
-</div>
-<!-- main-content -->
-<div class="footer-social-box">
-
-    <div class="wrapper">
-        <ul class="socials-link clearfix">
-
-            <li>
-                <a class="clearfix" title="Facebook" rel="" target="" href="https://www.facebook.com/HitMakerNation/">
-                    <i class="ti-facebook pull-left"></i>
-                    <span class="pull-left">Facebook</span>
-                </a>
-            </li>
-
-
-            <li>
-                <a class="clearfix" title="Twitter" rel="" target="" href="https://twitter.com/HitMakerNation">
-                    <i class="ti-twitter-alt pull-left"></i>
-                    <span class="pull-left">Twitter</span>
-                </a>
-            </li>
-
-
-            <li>
-                <a class="clearfix" title="YouTube" rel="" target=""
-                   href="https://www.youtube.com/channel/UCb99Tach_Xwb0sp75O_fI5A?sub_confirmation=1">
-                    <i class="ti-youtube pull-left"></i>
-                    <span class="pull-left">YouTube</span>
-                </a>
-            </li>
-
-        </ul>
-
-
-    </div>
-</div>
-
-<div id="kopa-page-footer">
-
-    <div class="mask"></div>
-
-    <div id="bottom-sidebar">
-
-        <div class="wrapper">
-
-            <div class="row">
-
-                <div class="col-md-4 col-sm-4">
-
-
-                    <div id="text-3" class="widget widget_text">
-                        <div class="textwidget"><p>Proin eu sapien non tortor mattis auctor ac sit amet justo. Aliquam
-                                pellentesque odio quis eleifend aliquet. In id sodales dui. Pellentesque ac est risus.
-                                Vestibulum elementum elementum massa, ultrices feugiat magna aliquam non. Nullam eu
-                                libero quis</p>
-                            <p>Aliquam pellentesque odio quis eleifend aliquet. In id sodales dui. Pellentesque ac est
-                                risus. Vestibulum elementum elementum massa, ultrices feugiat magna aliquam non. Nullam
-                                eu libero quis</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-4 col-sm-4">
-
-                    <div id="kopa-twitter-widget-1" class="widget kopa-twitter-widget"><h2
-                                class="widget-title widget-title-s1">Twitter</h2>
-
-                        <ul class="clearfix">
-
-                            <li>
-                                <article class="tweet-item clearfix">
-                                    <div class="tweet-avatar pull-left"><i class="fa fa-twitter"></i></div>
-                                    <div class="tweet-detail">
-                                        <p>The Month in WordPress: June&nbsp;2017 <a href="https://t.co/SJ08pfrigD"
-                                                                                     target="_blank">https://t.co/SJ08pfrigD</a>
-                                        </p>
-                                        <span class="tweet-time">12 days ago</span>
-                                    </div>
-                                </article>
-                            </li>
-                            <li>
-                                <article class="tweet-item clearfix">
-                                    <div class="tweet-avatar pull-left"><i class="fa fa-twitter"></i></div>
-                                    <div class="tweet-detail">
-                                        <p>WordPress 4.8 “Evans” with community events tie-in, media widgets, improved
-                                            visual editor,… <a href="https://t.co/OkT8mm6ACF" target="_blank">https://t.co/OkT8mm6ACF</a>
-                                            <a href="https://t.co/m0RFmGoyb9"
-                                               target="_blank">https://t.co/m0RFmGoyb9</a></p>
-                                        <span class="tweet-time">37 days ago</span>
-                                    </div>
-                                </article>
-                            </li>
-                            <li>
-                                <article class="tweet-item clearfix">
-                                    <div class="tweet-avatar pull-left"><i class="fa fa-twitter"></i></div>
-                                    <div class="tweet-detail">
-                                        <p>WordPress 4.8 Release Candidate&nbsp;2 <a href="https://t.co/eadFYmd3hM"
-                                                                                     target="_blank">https://t.co/eadFYmd3hM</a>
-                                        </p>
-                                        <span class="tweet-time">44 days ago</span>
-                                    </div>
-                                </article>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 </body>
 </html>

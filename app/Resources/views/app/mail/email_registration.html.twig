@@ -1,0 +1,70 @@
+{% block subject %}
+    {{ 'app.email.registration.subject'|trans({'%username%': user.username}) }}
+{% endblock %}
+
+{% block body_text %}
+{% endblock %}
+
+{% block body_html %}
+    <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+            "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+    <html>
+    <head>
+        <title>{{ "app.email.layout.title"|trans }}</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    </head>
+    <body style="font-family: Arial, Helvetica, sans-serif; margin: 0;background-color: #eeeeee;color:#000;">
+    <table width="100%" border="0" cellpadding="0" cellspacing="0" align="center">
+        <tr>
+            <td width="100%" height="135" bgcolor="#eee" valign="middle" style="padding: 0 25px">
+                <table width="600" border="0" cellpadding="0" cellspacing="0" align="center">
+                    <tr>
+                        <td width="600" height="135" bgcolor="#eee" valign="middle" style="padding: 0 25px">
+                            <a href="{{ url('homepage') }}">
+                                <img src="{{ absolute_url(asset('img/planette.gif')) }}"
+                                     alt="{{ "app.email.layout.title"|trans }}"
+                                     style="display: block;border:0;">
+                            </a>
+                        </td>
+                        <td>
+                            <h1>{{ "app.email.layout.title"|trans }}</h1>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+    <table width="600" border="0" cellpadding="0" cellspacing="0" align="center">
+        <tr>
+            <td width="600" style="padding: 30px 25px 25px;font-size: 16px;color: #666666;background-color:#fff;">
+                <div style="font-size: 22px;color: #00a3ff;font-weight: bold;text-transform: uppercase;margin-bottom:25px;">
+                    {% block title %}{% endblock %}
+                </div>
+                {% block content %}
+                    {{ 'app.email.registration.message'|trans({'%username%': user.username}) }}
+                    <a href="{% block button_url %}{{ confirmationUrl }}{% endblock %}"
+                       style="display:block;padding: 15px; text-align: center; background-color: #eee; color:#000
+                       !important;
+                       text-decoration: none !important;">{% block button_label %} {{ 'app.email.registration.button'|trans }}{% endblock %}</a>
+                    {{ 'app.email.registration.message_two'|trans }}
+                {% endblock %}
+                {% block footer %}
+                    <p>{{ "app.email.layout.contact"|trans }}</p>
+                    <p>
+                        {{ "app.email.layout.thanks"|trans }}<br>
+                        {{ "app.email.layout.service_customer"|trans }}
+                    </p>
+                {% endblock %}
+            </td>
+        </tr>
+
+        <tr>
+            <td width="600" bgcolor="#f1f1f1" style="font-size: 14px;color: #000!important;padding: 15px 0 25px;">
+                <strong>{{ "app.email.layout.name"|trans }}</strong> &copy; {{ "app.email.layout.right"|trans }}<br>
+                {{ "app.email.layout.info_contact"|trans }}
+            </td>
+        </tr>
+    </table>
+    </body>
+    </html>
+{% endblock %}

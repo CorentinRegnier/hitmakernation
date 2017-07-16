@@ -1,39 +1,81 @@
-<nav class="navbar navbar-default">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
-                    aria-expanded="false" aria-controls="navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#">{{ 'common.title'|trans }}</a>
+<header id="header">
+    <div id="kopa-page-header">
+        <div id="kopa-header-top">
+            <div class="outer clearfix">
+                <div id="logo-image" class="pull-left">
+                    <a href="{{ path('homepage') }}">
+                        <img src="{{ asset('img/logo.png')|imagine_filter('header_logo') }}"
+                             alt="{{ 'common.title'|trans }}">
+                    </a>
+                </div>
+                <div id="kopa-header-top-inner" class="pull-left">
+                    <div class="clearfix">
+                        <div class="left-col pull-left line-divider clearfix">
+                            <ul class="social-links pull-right clearfix">
+                                <li>
+                                    <a href="https://www.facebook.com/HitMakerNation/" target="_blank"
+                                       title="{{ 'common.social_network.facebook'|trans }}"
+                                       class="fa fa-facebook"></a>
+                                </li>
+                                <li>
+                                    <a href="https://twitter.com/HitMakerNation" target="_blank"
+                                       title="{{ 'common.social_network.twitter'|trans }}" class="fa fa-twitter">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://www.youtube.com/channel/UCb99Tach_Xwb0sp75O_fI5A?sub_confirmation=1"
+                                       target="_blank" title="{{ 'common.social_network.twitter'|trans }}"
+                                       class="fa fa-youtube"></a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="right-col line-divider pull-left">
+                            {% if app.user is not null %}
+                                <a class="signin-button" href="{{ path('fos_user_profile_show') }}">
+                                    {{ 'app.menu.account'|trans }}
+                                </a>
+                                <a class="reg-button" href="{{ path('fos_user_security_logout') }}">
+                                    {{ 'app.menu.logout'|trans }}
+                                </a>
+                            {% else %}
+                                <a class="signin-button" href="{{ path('fos_user_security_login') }}">
+                                    {{ 'app.menu.login'|trans }}
+                                </a>
+                                <a class="reg-button" href="{{ path('fos_user_registration_register') }}">
+                                    {{ 'app.menu.register'|trans }}
+                                </a>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="clearfix">
+                        <div class="left-col pull-left clearfix">
+                            <div class="search-box clearfix">
+                                <form action="{{ path('homepage') }}" class="search-form pull-left clearfix">
+                                    <input placeholder="Search..." type="text" value="" name="s" id="s"
+                                           class="search-text">
+                                    <button type="submit" class="search-submit"><i class="fa fa-search"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="right-col pull-left">
+                            <a class="shopping-cart-button clearfix" href="https://hitmakernation.com/cart">
+                                <i class="fa fa-shopping-cart pull-left"></i>
+                                <span class="pull-left">
+											0 items - <span class="woocommerce-Price-amount amount">0,00<span
+                                                class="woocommerce-Price-currencySymbol">€</span></span>										</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div id="navbar" class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Home</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Contact</a></li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                       aria-expanded="false">Dropdown <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">Action</a></li>
-                        <li><a href="#">Another action</a></li>
-                        <li><a href="#">Something else here</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li class="dropdown-header">Nav header</li>
-                        <li><a href="#">Separated link</a></li>
-                        <li><a href="#">One more separated link</a></li>
-                    </ul>
-                </li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="#">Default</a></li>
-                <li><a href="#">Static top</a></li>
-                <li class="active"><a href="./">Fixed top <span class="sr-only">(current)</span></a></li>
-            </ul>
-        </div><!--/.nav-collapse -->
+        <div id="kopa-header-bottom">
+            <div class="outer clearfix">
+                <nav id="main-nav">
+                    {{ knp_menu_render('AppBundle:AppBuilder:mainMenu', {'template': 'app/menu/main.html.twig','currentClass': 'active'}) }}
+                </nav>
+            </div>
+        </div>
     </div>
-</nav>
+</header>

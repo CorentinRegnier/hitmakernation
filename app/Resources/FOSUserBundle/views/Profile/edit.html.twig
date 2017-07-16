@@ -1,0 +1,94 @@
+{% extends "app/form.html.twig" %}
+
+{% block current_stylesheet %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('libraries/intl-tel-input-master/css/intlTelInput.css') }}">
+{% endblock %}
+
+{% block content %}
+    {{ form_start(form, { 'action': path('fos_user_profile_edit'), 'attr': { 'class': 'fos_user_profile_edit' } }) }}
+    <h2>{{ 'app.user.profile.edit.title'|trans }}</h2>
+    <span class="text-gray"><span class="text-danger">*</span> {{ 'common.obligatory_fields'|trans }}</span>
+    <div class="row">
+        <div class="col-md-3">
+            {{ form_row(form.username) }}
+        </div>
+        <div class="col-md-3">
+            {{ form_row(form.email) }}
+        </div>
+        <div class="col-md-3">
+            {{ form_row(form.phone) }}
+        </div>
+        <div class="col-md-3">
+            {{ form_row(form.civility) }}
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-md-3">
+            {{ form_row(form.address) }}
+        </div>
+        <div class="col-md-3">
+            {{ form_row(form.city) }}
+        </div>
+        <div class="col-md-3">
+            {{ form_row(form.zipCode) }}
+        </div>
+        <div class="col-md-3">
+            {{ form_row(form.country) }}
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-md-3">
+            {{ form_row(form.lastName) }}
+        </div>
+        <div class="col-md-3">
+            {{ form_row(form.firstName) }}
+        </div>
+        <div class="col-md-3">
+            {{ form_row(form.birthdayDate) }}
+        </div>
+        <div class="col-md-3">
+            {{ form_row(form.current_password) }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6 text-left-sm text-center">
+            {{ form_row(form.generalCondition) }}
+        </div>
+        <div class="col-sm-6 text-right-sm text-center">
+            <a href="{{ path('fos_user_change_password') }}"
+               class="btn btn-primary">{{ 'app.user.profile.edit_password.title'|trans }}
+            </a>
+            <input type="submit" class="btn btn-success" id="_submit" name="_submit"
+                   value="{{ 'common.button.save'|trans }}"/>
+        </div>
+    </div>
+    {{ form_end(form) }}
+{% endblock content %}
+
+{% block view_js %}
+    <script src="{{ asset('libraries/intl-tel-input-master/js/intlTelInput.min.js') }}"></script>
+    <script>
+        $(document).ready(function () {
+            var telInput = $("#fos_user_profile_form_phone");
+            telInput.intlTelInput({
+                initialCountry: "auto",
+                separateDialCode: true,
+                preferredCountries: ["fr", "us", "gb"],
+                geoIpLookup: function (callback) {
+                    $.get('http://ipinfo.io', function () {
+                    }, "jsonp").always(function (resp) {
+                        var countryCode = (resp && resp.country) ? resp.country : "";
+                        callback(countryCode);
+                    });
+                },
+                utilsScript: "{{ asset('libraries/intl-tel-input-master/js/utils.js') }}"
+            });
+            $('form').submit(function () {
+                telInput.val(telInput.intlTelInput("getNumber"));
+            });
+        });
+    </script>
+{% endblock %}

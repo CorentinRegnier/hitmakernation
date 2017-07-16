@@ -1,0 +1,24 @@
+{% extends 'knp_menu_base.html.twig' %}
+
+{% block root %}
+    <ol class="breadcrumb clearfix">
+        <li><a href="{{ path('homepage') }}">{{ 'app.menu.homepage'|trans }}</a></li>
+        {% for item in item.children %}
+            {% if not loop.last %}
+                <li>
+                    <a href="{{ item.uri }}">
+                        <i class="{{ item.attribute('icon') }}"></i>
+                        {{ item.name|trans }}
+                    </a>
+                </li>
+            {% else %}
+                <li class="active">
+                    <span>
+                        <i class="{{ item.attribute('icon') }}"></i>
+                        {{ item.name|trans }}
+                    </span>
+                </li>
+            {% endif %}
+        {% endfor %}
+    </ol>
+{% endblock %}
