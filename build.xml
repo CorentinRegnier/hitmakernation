@@ -32,16 +32,19 @@
         <exec command="git pull origin master" passthru="true" checkreturn="true"/>
         <exec command="rm -rf var/cache/*" passthru="true" checkreturn="true"/>
         <echo message="Composer install..."/>
-        <exec command="SYMFONY_ENV=prod composer install --no-dev --optimize-autoloader" passthru="true"
-              checkreturn="true"/>
+        <exec command="SYMFONY_ENV=prod composer install --no-dev --optimize-autoloader" passthru="true" checkreturn="true"/>
         <echo message="Clear cache..."/>
         <exec command="rm -rf var/cache/*" passthru="true" checkreturn="true"/>
+        <echo message="Remove uploads..."/>
+        <exec command="rm -rf web/upload/*" passthru="true" checkreturn="true"/>
         <echo message="Reset database..."/>
         <exec command="php bin/console doctrine:schema:update --force -e=prod" passthru="true"/>
+        <echo message="Load fixtures..."/>
+        <exec command="php bin/console doctrine:fixtures:load -e=prod --no-interaction" passthru="true" checkreturn="true"/>
+        <echo message="Test..."/>
+        <exec command="php bin/console doctrine:schema:validate -e=prod" passthru="true" checkreturn="true" />
         <echo message="Disable index..."/>
         <exec command="echo 'User-agent: *${line.separator}Disallow: /' > web/robots.txt" passthru="true"/>
-        <echo message="Load fixtures..."/>
-        <exec command="php bin/console doctrine:fixtures:load" passthru="true" checkreturn="true"/>
     </target>
 
     <target name="update:dev" description="Update project in dev">
@@ -55,10 +58,18 @@
         <exec command="composer install" passthru="true" checkreturn="true"/>
         <echo message="Clear cache..."/>
         <exec command="rm -rf var/cache/*" passthru="true" checkreturn="true"/>
+        <echo message="Remove uploads..."/>
+        <exec command="rm -rf web/upload/*" passthru="true" checkreturn="true"/>
         <echo message="Reset database..."/>
         <exec command="php bin/console doctrine:schema:update --force" passthru="true"/>
         <echo message="Load fixtures..."/>
         <exec command="php bin/console doctrine:fixtures:load --no-interaction" passthru="true" checkreturn="true"/>
+        <echo message="Restart elasticsearch..."/>
+        <exec command="php bin/console fos:elastica:reset" passthru="true" checkreturn="true"/>
+        <exec command="php bin/console fos:elastica:populate" passthru="true" checkreturn="true"/>
+        <echo message="Test..."/>
+        <exec command="php bin/console security:check" passthru="true"  checkreturn="true"/>
+        <exec command="php bin/console doctrine:schema:validate" passthru="true" checkreturn="true" />
     </target>
 
     <target name="remote:update:preprod" description="Remotely update the preprod">
