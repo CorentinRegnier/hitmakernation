@@ -1,0 +1,11 @@
+{% extends "app/base.html.twig" %}
+
+{% block content %}
+    <h2 class="text-center">{{ 'app.user.register.title'|trans }}</h2>
+    <div>
+        <p>{{ 'app.user.register.confirmed'|trans({'%username%': user.username}) }}</p>
+        {% if targetUrl %}
+            <a href="{{ targetUrl }}" class="btn btn-lg btn-success">{{ 'app.user.register.back'|trans }}</a>
+        {% endif %}
+    </div>
+{% endblock content %}

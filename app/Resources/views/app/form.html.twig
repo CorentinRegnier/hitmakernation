@@ -1,0 +1,42 @@
+{% extends 'app/base.html.twig' %}
+
+{% if form is defined and form is not null and form is not empty %}
+    {% form_theme form 'app/form/theme.html.twig' %}
+{% endif %}
+{% block current_stylesheet %}
+    {{ parent() }}
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css"
+          rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet"/>
+{% endblock %}
+
+{% block current_script %}
+    {{ parent() }}
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js">
+    </script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/locale/{{ app.request.locale }}.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.js-datepicker').datetimepicker({
+                format: 'DD/MM/YYYY'
+            });
+            $('select').select2();
+            var propertyType = $(".type-placeholder");
+            propertyType.attr(
+                "data-placeholder",
+                "{{ 'app.form.property_search_engine.property_type'|trans }}"
+            );
+            propertyType.select2();
+            {% block icheck_script %}
+                $('input[type="checkbox"], input[type="radio"]').iCheck({
+                    checkboxClass: 'icheckbox_minimal-green',
+                    radioClass: 'iradio_minimal-green'
+                });
+            {% endblock %}
+        });
+    </script>
+{% endblock %}

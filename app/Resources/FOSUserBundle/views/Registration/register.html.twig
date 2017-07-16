@@ -1,0 +1,68 @@
+{% extends "app/form.html.twig" %}
+
+{% block page_title %}{{ 'app.user.register.title'|trans }}{% endblock %}
+
+{% block content %}
+    {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
+    <div class="row">
+        <div class="col-md-6">
+            {{ form_row(form.username) }}
+        </div>
+        <div class="col-md-6">
+            {{ form_row(form.email) }}
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        {% for children in form.plainPassword.children %}
+            <div class="col-md-6">
+                {{ form_row(children) }}
+            </div>
+        {% endfor %}
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-md-3">
+            {{ form_row(form.lastName) }}
+        </div>
+        <div class="col-md-3">
+            {{ form_row(form.firstName) }}
+        </div>
+        <div class="col-md-3">
+            {{ form_row(form.birthdayDate) }}
+        </div>
+        <div class="col-md-3">
+            {{ form_row(form.civility) }}
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-md-6">
+            {{ form_row(form.address) }}
+        </div>
+        <div class="col-md-3">
+            {{ form_row(form.city) }}
+        </div>
+        <div class="col-md-3">
+            {{ form_row(form.zipCode) }}
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-md-4">
+            {{ form_row(form.country) }}
+        </div>
+        <div class="col-md-4">
+            {{ form_row(form.phone) }}
+        </div>
+        <div class="col-md-4">
+            {{ form_row(form.generalCondition) }}
+        </div>
+    </div>
+
+    <div class="text-left">
+        <input type="submit" class="btn btn-outline-success btn-success"
+               value="{{ 'common.button.save'|trans }}"/>
+    </div>
+    {{ form_end(form) }}
+{% endblock content %}

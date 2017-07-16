@@ -1,8 +1,9 @@
 {% extends 'app/base.html.twig' %}
 
+{% block page_title %}{{ 'common.error.404.title'|trans }}{% endblock %}
+
 {% block content %}
     <div class="text-center">
-        <h2><strong>{{ 'common.error.404.title'|trans }}</strong></h2>
         <p>
             {{ 'common.error.404.content'|trans }}
         </p>

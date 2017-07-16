@@ -1,0 +1,54 @@
+{% extends "app/form.html.twig" %}
+
+{% block page_title %}{{ 'app.user.login.title'|trans }}{% endblock %}
+
+{% block content %}
+    <form action="{{ path("fos_user_security_check") }}" method="post">
+        {% if error %}
+            <div class="alert alert-danger">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> {{ error.messageKey|trans(error
+                .messageData, 'security') }}
+            </div>
+        {% endif %}
+        {% if csrf_token %}
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token }}"/>
+        {% endif %}
+        <div class="form-group">
+            <label for="username">{{ 'app.user.login.username'|trans }}</label>
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
+                <input type="text" class="form-control" id="username" name="_username"
+                       value="{{ last_username }}"
+                       required="required"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="password">{{ 'app.user.login.password'|trans }}</label>
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-key" aria-hidden="true"></i></span>
+                <input type="password" class="form-control" id="password" name="_password" required="required"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="checkbox">
+                <label for="remember_me">
+                    <input type="checkbox" id="remember_me" name="_remember_me"
+                           value="on"/>
+                    {{ 'app.user.login.remember_me'|trans }}
+                </label>
+            </div>
+        </div>
+        <div class="row text-center">
+            <div class="col-sm-6">
+                <a class="btn btn-primary" href="{{ path('fos_user_resetting_request') }}">
+                    {{ 'app.user.login.forgotten_password'|trans }}
+                </a>
+            </div>
+            <div class="col-sm-6">
+                <input type="submit" class="btn btn-success" id="_submit" name="_submit"
+                       value="{{ 'common.button.connexion'|trans }}"/>
+            </div>
+        </div>
+    </form>
+{% endblock content %}

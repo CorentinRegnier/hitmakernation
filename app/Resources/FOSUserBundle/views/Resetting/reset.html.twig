@@ -1,0 +1,30 @@
+{% extends "app/form.html.twig" %}
+
+{% block content %}
+    {{ form_start(form, { 'action': path('fos_user_resetting_reset', {'token': token}), 'attr': { 'class': 'fos_user_resetting_reset' } }) }}
+    <h2>{{ 'app.user.resetting.title'|trans }}</h2>
+    <div>
+        {{ form_widget(form) }}
+    </div>
+    <div class="text-center">
+        <input type="submit" class="btn btn-success" value="{{ 'app.user.resetting.reset'|trans }}"/>
+    </div>
+    {{ form_end(form) }}
+{% endblock content %}
+
+
+{% block view_js %}
+    <script>
+        $(document).ready(function () {
+
+            var options = {};
+            options.rules = {
+                activated: {
+                    wordTwoCharacterClasses: true,
+                    wordRepetitions: true
+                }
+            };
+            $('#fos_user_resetting_form_plainPassword_first').pwstrength(options);
+        });
+    </script>
+{% endblock %}

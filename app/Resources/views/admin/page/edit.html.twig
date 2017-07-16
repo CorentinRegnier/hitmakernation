@@ -1,0 +1,17 @@
+{% extends 'admin/form.html.twig' %}
+
+{% import 'AgileAdminBundle:common:_submit.html.twig' as submit %}
+
+{% block box_title %}
+    {{ 'admin.page.edit.title'|trans }}
+{% endblock %}
+
+{% block box_body %}
+    {{ form_start(form) }}
+    {{ form_row(form.title) }}
+    {{ form_row(form.content) }}
+    {{ form_row(form.metaTitle) }}
+    {{ form_row(form.metaDescription) }}
+    {{ submit.button(path('admin_homepage')) }}
+    {{ form_end(form) }}
+{% endblock %}

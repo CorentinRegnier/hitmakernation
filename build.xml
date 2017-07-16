@@ -62,7 +62,7 @@
     </target>
 
     <target name="remote:update:preprod" description="Remotely update the preprod">
-        <exec command="ssh agile_skeleton@151.80.43.132 'cd site; vendor/bin/phing update:preprod'" passthru="true"
+        <exec command="ssh hitmakernation@151.80.43.132 'cd site; vendor/bin/phing update:preprod'" passthru="true"
               checkreturn="true"/>
     </target>
 

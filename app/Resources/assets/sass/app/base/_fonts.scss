@@ -16,7 +16,7 @@
 /* ==========================================================================
    Raleway
    ========================================================================== */
-@include font(raleway, $font-family-raleway, regular);
-@include font(raleway, $font-family-raleway, regular, italic);
-@include font(raleway, $font-family-raleway, bold);
-@include font(raleway, $font-family-raleway, bold, italic);
+@include font(source, $font-family-source, regular);
+@include font(source, $font-family-source, regular, italic);
+@include font(source, $font-family-source, bold);
+@include font(source, $font-family-source, bold, italic);

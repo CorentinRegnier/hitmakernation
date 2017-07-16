@@ -44,6 +44,15 @@ Text Domain: beatmix
     border: 0;
 }
 
+.breadcrumb {
+    li + li:before {
+        content: "> ";
+        padding: 0 5px;
+        font-weight: bold;
+        color: #fff;
+    }
+}
+
 .outer:before, .entry-box .entry-content-wrap .left-col .about-author .author-content footer:before, .kopa-blog-classic-widget ul li .entry-item .entry-content footer a:before, .kopa-audio-list-2-widget > header:before, .kopa-album-widget .masonry-container .container-masonry .item .entry-item .entry-bottom:before, .kopa-album-widget .masonry-container .container-masonry .item .jp-time-holder:before, .kopa-event-3-widget .kopa-event-carousel .item ul > li:before, .kopa-event-widget > ul > li:before, .kopa-album-list .entry-item .entry-bottom:before, .kopa-album-list .jp-time-holder:before, .kopa-rating ul:before, .kopa-audio-list-widget > header:before, .kopa-countdown:before, .btn-ca li:before, .kopa-audio-list-1-widget .jp-audio:before, .kopa-countdown-2:before, .kopa-tab.style1 .nav-tabs:before, .kopa-audio-download-widget .entry-item:before, .kopa-event-2-widget > ul > li:before, .jp-audio.kopa-jp-wrap4 .jp-interface > header:before, .jp-audio.kopa-jp-wrap4 .jp-interface > footer:before, .outer:after, .entry-box .entry-content-wrap .left-col .about-author .author-content footer:after, .kopa-blog-classic-widget ul li .entry-item .entry-content footer a:after, .kopa-audio-list-2-widget > header:after, .kopa-album-widget .masonry-container .container-masonry .item .entry-item .entry-bottom:after, .kopa-album-widget .masonry-container .container-masonry .item .jp-time-holder:after, .kopa-event-3-widget .kopa-event-carousel .item ul > li:after, .kopa-event-widget > ul > li:after, .kopa-album-list .entry-item .entry-bottom:after, .kopa-album-list .jp-time-holder:after, .kopa-rating ul:after, .kopa-audio-list-widget > header:after, .kopa-countdown:after, .btn-ca li:after, .kopa-audio-list-1-widget .jp-audio:after, .kopa-countdown-2:after, .kopa-tab.style1 .nav-tabs:after, .kopa-audio-download-widget .entry-item:after, .kopa-event-2-widget > ul > li:after, .jp-audio.kopa-jp-wrap4 .jp-interface > header:after, .jp-audio.kopa-jp-wrap4 .jp-interface > footer:after {
     content: "";
     display: table;
@@ -2654,7 +2663,6 @@ body {
     width: 285px;
     text-align: center;
     height: 101px;
-    padding: 35px 0;
 }
 
 #kopa-page-header #kopa-header-top #logo-image a {
@@ -2851,14 +2859,6 @@ body {
     list-style: none;
 }
 
-#main-menu > li.mega-menu {
-    position: static;
-}
-
-#main-menu > li:first-child {
-    margin: 0;
-}
-
 #main-menu > li > a {
     padding: 0;
     text-transform: uppercase;
@@ -2881,111 +2881,17 @@ body {
     filter: Alpha(Opacity=0);
 }
 
-#main-menu > li:hover > a, #main-menu > li.current-menu-item > a {
+#main-menu > li:hover > a, #main-menu > li.active > a, #main-menu > li.current-menu-item > a {
     color: #38b883;
 }
 
-#main-menu > li:hover > a:before, #main-menu > li.current-menu-item > a:before {
+#main-menu > li:hover > a:before, #main-menu > li.active > a:before, #main-menu > li.current-menu-item > a:before {
     opacity: 1;
     filter: Alpha(Opacity=100);
 }
 
-#main-menu > li > ul {
-    width: 250px;
-    display: none;
-    position: absolute;
-    left: 0;
-    top: 95px;
-    margin: 0;
-    padding: 0;
-    z-index: 1;
-    background-color: #191523;
-    border-top: 2px solid #38b883;
-    text-align: left;
-}
-
-#main-menu > li > ul > li {
-    list-style: none;
-    padding: 10px 15px;
-    position: relative;
-    z-index: 1;
-    border-top: 1px solid #4b4756;
-    margin: 0;
-}
-
-#main-menu > li > ul > li:first-child {
-    border-top: none;
-}
-
-#main-menu > li > ul > li > a {
-    display: block;
-    font-weight: 300;
-    color: #ffffff;
-    position: relative;
-    z-index: 1;
-    font-size: 14px;
-}
-
-#main-menu > li > ul > li:hover, #main-menu > li > ul > li.current-menu-item {
-    background-color: #ffffff;
-}
-
-#main-menu > li > ul > li:hover > a, #main-menu > li > ul > li.current-menu-item > a {
-    color: #403361;
-}
-
-#main-menu > li > ul > li ul {
-    left: 251px;
-    top: -1px;
-    width: 250px;
-    display: none;
-    position: absolute;
-    margin: 0;
-    padding: 0px;
-    z-index: 1;
-    background-color: #191523;
-    border-top: 2px solid #38b883;
-    text-align: left;
-}
-
-#main-menu > li > ul > li ul li {
-    list-style: none;
-    padding: 10px 15px;
-    position: relative;
-    z-index: 1;
-    border-top: 1px solid #4b4756;
-    margin: 0;
-}
-
-#main-menu > li > ul > li ul li:first-child {
-    border-top: none;
-}
-
-#main-menu > li > ul > li ul li a {
-    display: block;
-    font-weight: 300;
-    color: #ffffff !important;
-    position: relative;
-    z-index: 1;
-    font-size: 14px;
-}
-
-#main-menu > li > ul > li ul li:hover, #main-menu > li > ul > li ul li.current-menu-item {
-    background-color: #ffffff;
-}
-
-#main-menu > li > ul > li ul li:hover a, #main-menu > li > ul > li ul li.current-menu-item a {
-    color: #403361 !important;
-}
-
 .sf-with-ul:after {
     display: none;
-}
-
-#main-menu .sf-mega {
-    position: absolute;
-    left: 0;
-    top: 45px;
 }
 
 .sf-mega {
@@ -10786,7 +10692,6 @@ Woocommerce default widget
         width: 500%;
     }
     #main-menu > li {
-        margin-left: 20px;
         padding: 20px 0;
     }
     #main-menu > li > ul {
@@ -10997,21 +10902,6 @@ Woocommerce default widget
     }
     .kp-headline-wrapper {
         max-width: 254px;
-    }
-    #main-menu {
-        display: none;
-    }
-
-    .mobile-menu-wrapper {
-        display: block;
-    }
-
-    #main-nav > i {
-        display: inline-block;
-        margin: 10px 0;
-    }
-    #main-nav {
-        text-align: left;
     }
     .kopa-featured-audio-widget > .outer > .col-left .album-thumb {
         display: none;
@@ -11236,11 +11126,6 @@ Woocommerce default widget
     #kopa-page-header #kopa-header-top #kopa-header-top-inner > .clearfix .right-col {
         width: 50%;
         padding-right: 0;
-    }
-    #main-nav {
-        position: absolute;
-        bottom: 0;
-        right: 0;
     }
     #kopa-page-header,
     .kopa-ab {
@@ -11528,11 +11413,14 @@ Woocommerce default widget
     #kopa-page-header #kopa-header-top #kopa-header-top-inner > .clearfix .right-col .reg-button {
         display: none;
     }
-    #main-nav {
-        bottom: 51px;
-    }
     #kopa-page-header #kopa-header-top #kopa-header-top-inner > .clearfix:last-child .right-col {
         display: none;
+    }
+    #main-menu {
+        li {
+            width: 100%;
+            margin: 0;
+        }
     }
     #kopa-page-header #kopa-header-top #kopa-header-top-inner > .clearfix:last-child .left-col {
         width: 100%;

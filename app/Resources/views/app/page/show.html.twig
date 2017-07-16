@@ -1,0 +1,8 @@
+{% extends 'app/base.html.twig' %}
+
+{% block content %}
+    <h2>{{ page.title }}</h2>
+    <p>
+        {{ page.content|html_raw }}
+    </p>
+{% endblock %}

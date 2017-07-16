@@ -1,0 +1,6 @@
+{% extends "app/base.html.twig" %}
+
+{% block content %}
+    <h2>{{ 'app.user.resetting.title'|trans }}</h2>
+    <p>{{ 'app.user.resetting.check_email'|trans({'%tokenLifetime%': tokenLifetime})|nl2br }}</p>
+{% endblock content %}
