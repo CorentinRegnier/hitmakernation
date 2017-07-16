@@ -10,17 +10,20 @@ var gulp = require('gulp'), //== https://github.com/gulpjs/gulp
     shell = require('gulp-shell'), //== https://github.com/sun-zheng-an/gulp-shell
     uglify = require('gulp-uglify'), //== https://github.com/terinjokes/gulp-uglify
     concat = require('gulp-concat'), //== https://github.com/contra/gulp-concat
-    sourcemaps = require('gulp-sourcemaps'), //== https://github.com/floridoo/gulp-sourcemaps
     yaml = require("js-yaml"), //== https://github.com/nodeca/js-yaml
-    fs = require("fs"), //== https://nodejs.org/dist/latest-v7.x/docs/api/fs.html
+    fs = require("fs"),
+    newer = require('gulp-newer'), //== https://github.com/tschaub/gulp-newer
+    argv = require('yargs').argv, //== https://github.com/yargs/yargs
 
     projectProtocol = 'https',
-    projectHost = 'immo.sf',
+    projectHost = 'hitmakernation.sf',
 
+    shortSrcAssets = 'app/Resources/assets',
     srcAssets = './app/Resources/assets',
     distAssets = './web',
 
     source = {
+        dir: './', // add "{cwd: source.dir}" in watch task => http://stackoverflow.com/questions/22391527/gulps-gulp-watch-not-triggered-for-new-or-deleted-files
         img: distAssets + '/img',
         sprites: distAssets + '/img/sprites',
         sass: srcAssets + '/sass',
@@ -28,10 +31,12 @@ var gulp = require('gulp'), //== https://github.com/gulpjs/gulp
         yml: './app/config/assets.yml'
     },
     watch = {
-        sass: srcAssets + '/sass/**/**/*.scss',
+        sass: shortSrcAssets + '/sass/**/**/*.scss',
+        sassCorp: shortSrcAssets + '/sass/app_corporate.scss',
         css: distAssets + '/css/*.css',
         js: srcAssets + '/js/**/*.js',
-        twig: './app/Resources/views/**/**/**/*.html.twig'
+        twig: './app/Resources/views/**/**/**/*.html.twig',
+        controllers: 'src/AppBundle/Controller/*.php'
     },
     dist = {
         css: distAssets + '/css',
@@ -40,12 +45,10 @@ var gulp = require('gulp'), //== https://github.com/gulpjs/gulp
         js: distAssets + '/js'
     };
 
-
 //== sprites :: gulp icons or logos (sprite alone), gulp icons-sass gulp logos-sass (sprite + sass)
-var hash = '', hashPattern = "abcdefghijklmnopqrstuvwxyz0123456789";
+var hashName = '', hash = '', hashPattern = "abcdefghijklmnopqrstuvwxyz0123456789";
 
 function makeHash(hashName) {
-    var hashName = '';
 
     for (var i = 0; i < 11; i++) {
         hashName += hashPattern.charAt(Math.floor(Math.random() * hashPattern.length));
@@ -68,7 +71,7 @@ function makeSprite(spriteVar, name) {
         chalk.white('hash generated ')
         + chalk.cyan.bold(hash)
     );
-    spriteVar = gulp.src(source.sprites + '/' + name + '/*.png').pipe(spritesmith({
+    spriteVar = gulp.src(source.img + '/sprites/' + name + '/*.png').pipe(spritesmith({
         cssSpritesheetName: hash,
         imgName: name + '.png',
         imgPath: '../img/sprites/' + name, // css write
@@ -83,35 +86,45 @@ function makeSprite(spriteVar, name) {
 gulp.task('icons', function () {
     var icons = '';
     makeSprite(icons, 'icons');
-    //var icons2x = '';
-    //makeSprite(icons2x, 'icons2x');
+});
+
+gulp.task('c-icons', function() {
+    var cIcons = '';
+    makeSprite(cIcons, 'c-icons');
 });
 
 
-//== sass :: gulp sass
+
+
+
+//== sass :: gulp sass, gulp sass --corp
 gulp.task('sass', function () {
-    gulp.src([watch.sass])
-        .pipe(plumber({
-            errorHandler: notify.onError({
-                message: "Error: <%= error.message %>",
-                sound: true
-            })
-        }))
+
+    if (argv.corp) {
+        watcher = gulp.src(source.dir + watch.sassCorp)
+    } else {
+        watcher = gulp.src(source.dir + watch.sass)
+    }
+
+    watcher.pipe(plumber({
+        errorHandler: notify.onError({
+            message: "Error: <%= error.message %>",
+            sound: true
+        })
+    }))
+        .pipe(newer(dist.css))
         .pipe(sass({
             outputStyle: 'compressed',
-            precision: 7,
             includePaths: [source.sass],
             errLogToConsole: true
-        }))
-        .pipe(rename({
-            extname: '.css'
         }))
         .pipe(plumber.stop())
         .pipe(gulp.dest(dist.css));
 });
 
 
-//== js-xxx (js-folderName => js-app, js-admin)
+
+
 loadJsTasks();
 
 function loadJsTasks() {
@@ -133,7 +146,6 @@ function createJsTask(name, sources) {
         }
 
         return gulp.src(test)
-            .pipe(sourcemaps.init())
             .pipe(plumber({
                 errorHandler: notify.onError({
                     message: "Error: <%= error.message %>",
@@ -141,9 +153,8 @@ function createJsTask(name, sources) {
                 })
             }))
             .pipe(concat(name + '.min.js'))
-            .pipe(uglify())
+            .pipe(uglify({compress: {hoist_funs: false, hoist_vars: false}}))
             .pipe(plumber.stop())
-            .pipe(sourcemaps.write('./'))
             .pipe(gulp.dest(dist.js));
     });
 }
@@ -157,8 +168,9 @@ gulp.task('bs', shell.task([
     ' + projectProtocol + '://' + projectHost + ' \
     ' + hasOpenUi + ' \
     --startPath "app_dev.php/" \
-    --files "' + watch.css + ', ' + watch.js + ', ' + watch.twig + '"'
+    --files "' + watch.css + ', ' + watch.js + ', ' + watch.twig + ', ' + watch.controllers + '"'
 ]));
+
 
 //== watch
 gulp.task('watch', function () {
@@ -166,7 +178,7 @@ gulp.task('watch', function () {
     function logWatch(files, tasks) {
 
         var match = new RegExp('.*(?=' + tasks + ')');
-        gulp.watch([files], [tasks]).on('change', function (evt) {
+        gulp.watch([files], {cwd: source.dir}, [tasks]).on('change', function (evt) {
             console.log(
                 chalk.cyan.bold(evt.path.replace(match, ''))
                 + chalk.white(' ' + evt.type)
@@ -178,5 +190,5 @@ gulp.task('watch', function () {
     }
 
     logWatch(watch.sass, 'sass');
-    logWatch(watch.js, ['app.js', 'admin.js']);
+    logWatch(watch.js, ['js-app', 'js-search']);
 });

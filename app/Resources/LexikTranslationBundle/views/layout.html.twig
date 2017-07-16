@@ -1,0 +1,18 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% trans_default_domain 'LexikTranslationBundle' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('bundles/lexiktranslation/ng-table/ng-table.min.css') }}">
+{% endblock %}
+
+{% block panel_title %}{% endblock %}
+{% block panel_body %}{% endblock %}
+
+{% block view_js %}
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.13/angular.min.js"></script>
+    <script src="{{ asset('bundles/lexiktranslation/ng-table/ng-table.min.js') }}"></script>
+    {% block javascript_footer %}
+    {% endblock javascript_footer %}
+{% endblock %}

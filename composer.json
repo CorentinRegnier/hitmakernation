@@ -1,6 +1,6 @@
 {
-    "name": "MWCorentin/Agile-Skeleton",
-    "description": "symfony3 agile starter Skeleton",
+    "name": "MWCorentin/hitmakernation",
+    "description": "symfony3 project",
     "license": "proprietary",
     "type": "project",
     "autoload": {
@@ -38,7 +38,12 @@
         "incenteev/composer-parameter-handler": "^2.0",
         "phing/phing": "~2.8",
         "stof/doctrine-extensions-bundle": "^1.2",
-        "twig/extensions": "~1.0"
+        "twig/extensions": "~1.0",
+        "friendsofsymfony/user-bundle": "^2.0",
+        "liip/imagine-bundle": "^1.8",
+        "lexik/translation-bundle": "^4.0",
+        "knplabs/knp-menu-bundle": "^2.1",
+        "cregnier/agile-admin-bundle": "^1.1"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",

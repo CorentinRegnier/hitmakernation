@@ -1,0 +1,12 @@
+{% extends 'app/base.html.twig' %}
+
+{% block content %}
+    <div class="text-center">
+        <h2><strong>{{ 'common.error.other.title'|trans }} {{ status_code }}</strong></h2>
+        <p>
+            {{ status_text }}
+        <p>
+            {{ 'common.error.other.content'|trans }}
+        </p>
+    </div>
+{% endblock %}

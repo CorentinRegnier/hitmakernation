@@ -1,0 +1,66 @@
+{% extends layout %}
+
+{% trans_default_domain 'LexikTranslationBundle' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('bundles/lexiktranslation/css/translation.css') }}">
+{% endblock %}
+
+{% block title %}{{ 'admin.nav.lexik_translation.grid'|trans({}, 'messages') }}{% endblock %}
+{% block content %}
+    <div class="box">
+        <div class="box-header">
+            <h3 class="box-title pull-left">
+                {{ 'admin.nav.lexik_translation.grid'|trans({}, 'messages') }}
+            </h3>
+            <div class="pull-right">
+                <a href="{{ path('lexik_translation_overview') }}" role="button" class="btn btn-default">
+                    <span class="fa fa-chevron-left"></span>
+                    {{ 'common.button.back'|trans({}, 'messages') }}
+                </a>
+            </div>
+        </div>
+        <div class="box-body">
+            {% include 'LexikTranslationBundle:Translation:_ngGrid.html.twig' %}
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block javascript_footer %}
+    {{ parent() }}
+    <script>
+        var translationCfg = {
+            locales: {{ locales | json_encode | raw }},
+            inputType: '{{ inputType }}',
+            autoCacheClean: {{ autoCacheClean ? 'true' : 'false' }},
+            profilerTokens: {{ tokens is not null ? (tokens | json_encode | raw) : 'null' }},
+            toggleSimilar: '{{ toggleSimilar }}',
+            url: {
+                list: '{{ path('lexik_translation_list') }}',
+                listByToken: '{{ path('lexik_translation_profiler', {'token': '-token-'}) }}',
+                update: '{{ path('lexik_translation_update', {'id': '-id-'}) }}',
+                invalidateCache: '{{ path('lexik_translation_invalidate_cache') }}'
+            },
+            label: {
+                hideCol: '{{ 'translations.show_hide_columns'|trans }}',
+                toggleAllCol: '{{ 'translations.toggle_all_columns'|trans }}',
+                invalidateCache: '{{ 'translations.invalidate_cache'|trans }}',
+                allTranslations: '{{ 'translations.all_translations'|trans }}',
+                profiler: '{{ 'translations.profiler'|trans }}',
+                dataSource: '{{ 'translations.data_source'|trans }}',
+                latestProfiles: '{{ 'translations.latest_profiles'|trans }}',
+                profile: '{{ 'translations.profile'|trans }}',
+                saveRow: '{{ 'translations.save_row'|trans }}',
+                domain: '{{ 'translations.domain'|trans }}',
+                key: '{{ 'translations.key'|trans }}',
+                save: '{{ 'translations.save'|trans }}',
+                updateSuccess: '{{ 'translations.successfully_updated'|trans }}',
+                updateFail: '{{ 'translations.update_failed'|trans }}',
+                noTranslations: '{{ 'translations.no_translations'|trans }}'
+            }
+        };
+    </script>
+    <script src="{{ asset('bundles/lexiktranslation/js/translation.js') }}"></script>
+{% endblock %}

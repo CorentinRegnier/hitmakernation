@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project name="agile_skeleton" default="help" basedir=".">
+<project name="hitmakernation" default="help" basedir=".">
 
     <property name="crondir" value="${project.basedir}/app/cron"/>
 

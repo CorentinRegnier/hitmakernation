@@ -1,0 +1,65 @@
+{% extends 'AgileAdminBundle::layout.html.twig' %}
+
+
+{% block dropdown_task %}{% endblock dropdown_task %}
+
+{% block dropdown_user %}
+    <li class="dropdown user user-menu">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            {% if app.user.avatar is defined %}
+                <img src="{{ asset('bundles/agileadmin/images/avatar.png') }}"
+                     class="user-image"
+                     alt="User Image">
+            {% endif %}
+            {% if app.user.lastName is defined and app.user.firstName is defined %}
+                <span class="hidden-xs">{{ app.user.firstName }} {{ app.user.lastName }}</span>
+            {% endif %}
+        </a>
+        <ul class="dropdown-menu">
+            <!-- Menu Footer-->
+            <li>
+                <a href="{{ path('homepage') }}"><i class="fa fa-undo" aria-hidden="true"></i>
+                    {{ 'admin.header.return_back'|trans }}
+                </a>
+            </li>
+            <li>
+                <a href="{{ path('fos_user_security_logout') }}">
+                    <i class="fa fa-sign-out" aria-hidden="true"></i>
+                    {{ 'admin.header.logout'|trans }}
+                </a>
+            </li>
+        </ul>
+    </li>
+{% endblock dropdown_user %}
+
+{% block control_sidebar_link %}{% endblock control_sidebar_link %}
+
+{% block control_sidebar %}{% endblock %}
+
+{% block color_theme %}skin-blue{% endblock color_theme %}
+
+{% block main_footer %}
+    <div class="pull-right hidden-xs">
+        <b>V</b> 1.0
+    </div>
+    <strong>{{ 'admin.global.copyright'|trans|html_raw }}
+        <a href="http://valepimmo.com">{{ 'common.title'|trans }}</a>.</strong>
+    {{ 'admin.global.rights_reserved'|trans }}.
+{% endblock main_footer %}
+
+{% block content_header %}
+    {% include '@AgileAdmin/common/_flash.html.twig' %}
+    <div>
+        {{ knp_menu_render('AppBundle:AdminBuilder:breadcrumb', {'template': '@AgileAdmin/common/_breadcrumb.html.twig', 'currentClass': 'active'}) }}
+    </div>
+{% endblock content_header %}
+
+{% block search_form %}{% endblock search_form %}
+
+{% block text_online %}{{ 'admin.global.connected'|trans }}{% endblock text_online %}
+
+{% block menu_title %}{{ 'admin.global.main_navigation'|trans|upper }}{% endblock menu_title %}
+
+{% block menu_content %}
+    {{ knp_menu_render('AppBundle:AdminBuilder:mainMenu', {'template': '@AgileAdmin/menu/main.html.twig', 'currentClass': 'active current'}) }}
+{% endblock menu_content %}

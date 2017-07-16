@@ -17,7 +17,7 @@ sudo debconf-set-selections <<< "mysql-server-5.5 mysql-server/root_password pas
 sudo debconf-set-selections <<< "mysql-server-5.5 mysql-server/root_password_again password $4"
 sudo apt-get -y install mysql-server
 
-sudo sed -i "s/3306/3302/" /etc/mysql/mysql.conf.d/mysqld.cnf
+sudo sed -i "s/3306/3304/" /etc/mysql/mysql.conf.d/mysqld.cnf
 sudo sed -i "s/127.0.0.1/0.0.0.0/" /etc/mysql/mysql.conf.d/mysqld.cnf
 
 mysql -u root -p$4 -e "CREATE USER 'root'@'%' IDENTIFIED BY '$4'; GRANT ALL PRIVILEGES ON * . * TO 'root'@'%' IDENTIFIED BY '$4'; FLUSH PRIVILEGES;"
@@ -38,7 +38,7 @@ sudo mv /var/www/config.inc.php /etc/phpmyadmin/config.inc.php
 sudo chmod 644 /etc/phpmyadmin/config.inc.php
 
 # Install PHP7
-sudo apt-get -y install php php7.0-mysql php7.0-cli php7.0-intl php7.0-curl php7.0-gd php-apcu php7.0-mcrypt
+sudo apt-get -y install php php7.0-mysql php7.0-cli php7.0-intl php7.0-curl php7.0-gd php-apcu php7.0-mcrypt php7.0-dev php-pear
 
 # Enable PHP7 mod
 sudo phpenmod mcrypt
@@ -69,21 +69,9 @@ sudo a2enmod rewrite
 sudo a2enmod ssl
 sudo a2ensite project
 
+# Active APCU-BC
+sudo pecl install apcu_bc-beta -y
+echo -e "[apcu]\nextension=apcu.so\nextension=apc.so\napc.enabled=1" | sudo tee --append /etc/php/7.0/apache2/php.ini > /dev/null
+
 # Restart Apache
 sudo service apache2 restart
-
-
-# Install Java
-# sudo apt-get install default-jre -y
-# sudo apt-get install default-jdk -y
-
-# Install elastic search
-# sudo wget -qO - https://packages.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
-# echo "deb https://packages.elastic.co/elasticsearch/2.x/debian stable main" | sudo tee -a /etc/apt/sources.list.d/elasticsearch-2.x.list
-# sudo apt-get update
-# sudo apt-get -y install elasticsearch
-# sudo echo "network.bind_host: 0" >> /etc/elasticsearch/elasticsearch.yml
-# sudo echo "network.host: 0.0.0.0" >> /etc/elasticsearch/elasticsearch.yml
-# sudo echo "http.port: 9202" >> /etc/elasticsearch/elasticsearch.yml
-# sudo service elasticsearch restart
-# sudo update-rc.d elasticsearch defaults 95 10

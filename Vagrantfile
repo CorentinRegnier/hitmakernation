@@ -40,9 +40,8 @@ Vagrant.configure(2) do |config|
   config.vm.box = "ubuntu/xenial64"
   config.vm.box_check_update = false
 
-  config.vm.network "forwarded_port", guest: 80, host: 8002
-  config.vm.network "forwarded_port", guest: 3306, host: 3302
-  config.vm.network "forwarded_port", guest: 9200, host: 9202
+  config.vm.network "forwarded_port", guest: 80, host: 8004
+  config.vm.network "forwarded_port", guest: 3306, host: 3304
   config.vm.network "private_network", ip: ip
 
    if Vagrant::Util::Platform.windows? then
@@ -63,6 +62,5 @@ Vagrant.configure(2) do |config|
   config.vm.provision "file", source: "./deploy/apache/ssl/project.key", destination: "/var/www/project.key"
   config.vm.provision "file", source: "./deploy/phpmyadmin/config.inc.php", destination: "/var/www/config.inc.php"
   config.vm.provision "file", source: "./deploy/phpmyadmin/apache.conf", destination: "/var/www/apache.conf"
-  config.vm.provision "file", source: "./deploy/rabbitmq/rabbitmq.config", destination: "/var/www/rabbitmq.config"
   config.vm.provision "shell", path: "./deploy/script.sh", args: [ip, name, url, '1234']
 end

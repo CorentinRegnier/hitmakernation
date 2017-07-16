@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Agile Skeleton Project.
+ * This file is part of the Hit Maker Nation Project.
  *
  * (c) Corentin Régnier <corentin.regnier59@gmail.fr>
  *

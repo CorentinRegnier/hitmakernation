@@ -1,0 +1,13 @@
+# Lexik Translation configuration
+lexik_translation:
+    fallback_locale: ["%locale%"]
+    managed_locales: "%list_locales%"
+    storage:
+        type: orm
+        object_manager: default
+    base_layout: "LexikTranslationBundle::layout.html.twig"
+    resources_registration:
+        type:                 all
+        managed_locales_only: true
+    grid_input_type: textarea
+    auto_cache_clean: true

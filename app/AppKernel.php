@@ -18,6 +18,13 @@ class AppKernel extends Kernel
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
 
             new AppBundle\AppBundle(),
+
+            new Knp\Bundle\MenuBundle\KnpMenuBundle(),
+            new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
+            new FOS\UserBundle\FOSUserBundle(),
+            new Liip\ImagineBundle\LiipImagineBundle(),
+            new AgileAdminBundle\AgileAdminBundle(),
+            new Lexik\Bundle\TranslationBundle\LexikTranslationBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

@@ -6,5 +6,5 @@ parameters:
     agile.contact_email: "%agile_contact_email%"
     agile.project_name: "%agile_project_name%"
     agile.project_title: "%agile_project_title%"
-    agile.vagrant_ip: 192.168.33.2
+    agile.vagrant_ip: 192.168.33.4
     agile.email_sender_name: "%agile_email_sender_name%"

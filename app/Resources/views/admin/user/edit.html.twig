@@ -1,0 +1,24 @@
+{% extends 'admin/form.html.twig' %}
+
+{% import 'AgileAdminBundle:common:_submit.html.twig' as submit %}
+
+{% block box_title %}
+    {{ 'admin.user.edit.title'|trans }}
+{% endblock %}
+
+{% block box_body %}
+    {{ form_start(form) }}
+    {{ form_row(form.username) }}
+    {{ form_row(form.email) }}
+    {{ form_row(form.lastName) }}
+    {{ form_row(form.firstName) }}
+    {{ form_row(form.address) }}
+    {{ form_row(form.zipCode) }}
+    {{ form_row(form.city) }}
+    {{ form_row(form.country) }}
+    {{ form_row(form.phone) }}
+    {{ form_row(form.roles) }}
+    {{ form_row(form.enabled) }}
+    {{ submit.button(path('admin_user_index')) }}
+    {{ form_end(form) }}
+{% endblock %}

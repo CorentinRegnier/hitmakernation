@@ -2,9 +2,9 @@
 # Set parameters here that may be different on each deployment target of the app, e.g. development, staging, production.
 # http://symfony.com/doc/current/best_practices/configuration.html#infrastructure-related-configuration
 parameters:
-    database_host:     192.168.33.2
-    database_port:     3302
-    database_name:     agile_skeleton
+    database_host:     192.168.33.4
+    database_port:     3304
+    database_name:     hitmakernation
     database_user:     root
     database_password: 1234
 
@@ -15,20 +15,20 @@ parameters:
     mailer_password:   ~
     mailer_port:       ~
 
-    session_prefix:    agile-skeleton
+    session_prefix:    hitmakernation
 
-    secret:            ThisTokenIsNotSoSecretChangeIt
+    secret:            S2bpS6l5GDJnvCqqNpA40SC3NgKEZ0
 
     session_path:           "%kernel.root_dir%/../var/sessions/%kernel.environment%"
 
     no_reply_email:    corentin.regnier59@gmail.com
-    no_reply_sender:    Agile Skeleton
+    no_reply_sender:    Hitmaker Nation
     agile_host_env: dev
-    agile_project_domain: agile-skeleton.sf
-    agile_project_url: https://agile-skeleton.sf/
-    agile_project_name: agile-skeleton
-    agile_project_title: Agile Skeleton
-    agile_email_sender_name: Agile Skeleton
+    agile_project_domain: hitmakernation.sf
+    agile_project_url: https://hitmakernation.sf/
+    agile_project_name: hitmakernation
+    agile_project_title: Hitmaker Nation
+    agile_email_sender_name: Hitmaker Nation
     agile_developer_email: corentin.regnier59@gmail.com
     agile_contact_email:    corentin.regnier59@gmail.com
     agile_vagrant_smb_user:
