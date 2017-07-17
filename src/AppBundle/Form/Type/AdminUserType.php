@@ -13,6 +13,7 @@ namespace AppBundle\Form\Type;
 
 use AppBundle\Entity\User;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -74,10 +75,17 @@ class AdminUserType extends AbstractType
                 'label'    => 'admin.form.enabled',
                 'required' => false,
             ])
+            ->add('birthdayDate', BirthdayType::class, [
+                'label'    => 'app.form.registration.birthday',
+                'widget'   => 'single_text',
+                'format'   => 'dd/MM/yyyy',
+                'attr'     => ['class' => 'js-datepicker'],
+                'required' => false,
+            ])
             ->add('roles', ChoiceType::class, [
                 'label'    => 'admin.form.user.role.label',
                 'multiple' => true,
-                'choices'  => User::getAvailableRoles(),
+                'choices'  => User::getAvailableAdminRoles(),
                 'required' => true,
             ]);
         if ($options['isCreation'] === true) {

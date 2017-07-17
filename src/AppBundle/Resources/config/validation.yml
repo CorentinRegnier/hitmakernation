@@ -1,0 +1,44 @@
+AppBundle\Entity\User:
+    properties:
+        lastName:
+            - NotNull:
+                message: form.user.last_name.not_null
+        firstName:
+            - NotNull:
+                message: form.user.first_name.not_null
+        generalCondition:
+            - NotNull:
+                message: form.user.general_condition.not_null
+            - EqualTo:
+                value: true
+                message: form.user.general_condition.not_null
+        birthdayDate:
+            - Date:
+                message: form.user.birthday_date.date
+        phone:
+            - Regex:
+                pattern: '/[0-9]{10}/'
+                message: form.user.phone.regex
+        zipCode:
+            - Regex:
+                pattern: '/[0-9]{5}/'
+                message: form.user.zip_code.regex
+        plainPassword:
+            - Length:
+                min: 8
+        enabled:
+            - NotNull:
+                message: form.enabled.not_null
+    getters:
+        lower:
+            - IsTrue:
+                message: form.user.birthday_date.lower
+
+AppBundle\Entity\Page:
+    properties:
+        title:
+            - NotNull:
+                message: form.page.title.not_null
+        content:
+            - NotNull:
+                message: form.page.content.not_null

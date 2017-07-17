@@ -16,6 +16,7 @@ namespace AppBundle\Form\Type;
  */
 class ProfileFormType extends UserType
 {
+
     /**
      * @return string
      */

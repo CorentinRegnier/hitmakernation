@@ -25,18 +25,6 @@
                 format: 'DD/MM/YYYY'
             });
             $('select').select2();
-            var propertyType = $(".type-placeholder");
-            propertyType.attr(
-                "data-placeholder",
-                "{{ 'app.form.property_search_engine.property_type'|trans }}"
-            );
-            propertyType.select2();
-            {% block icheck_script %}
-                $('input[type="checkbox"], input[type="radio"]').iCheck({
-                    checkboxClass: 'icheckbox_minimal-green',
-                    radioClass: 'iradio_minimal-green'
-                });
-            {% endblock %}
         });
     </script>
 {% endblock %}

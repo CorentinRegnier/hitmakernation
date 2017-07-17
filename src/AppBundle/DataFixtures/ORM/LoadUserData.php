@@ -33,7 +33,7 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface
     /**
      * @var array
      */
-    private $phone = ['+33103068596', '+36258245672', '+33333556644', '+33645987562', '+33644669988'];
+    private $phone = ['0103068596', '0258245672', '0333556644', '0645987562', '0644669988'];
 
     /**
      * @var array
@@ -93,11 +93,34 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface
             ->setPlainPassword('xxx')
             ->setUsername('admin')
             ->setEmail('admin@gmail.com')
-            ->addRole('ROLE_SUPER_ADMIN')
+            ->addRole(User::USER_ROLE_SUPER_ADMIN)
             ->setEnabled(true);
 
         $manager->persist($superAdmin);
         $this->addReference('super-admin', $superAdmin);
+
+        for ($i = 21; $i <= 30; $i++) {
+            $randomAddress = $this->address[rand(0, 4)];
+            $date          = new \DateTime();
+            $user          = new User();
+            $user
+                ->setCivility(array_rand(array_flip(User::getAvailableCivilities())))
+                ->setFirstName($this->firstNames[rand(0, 7)])
+                ->setLastName($this->lastNames[rand(0, 7)])
+                ->setPhone(array_rand(array_flip($this->phone)))
+                ->setBirthdayDate($date->sub(new \DateInterval('P'.rand(18, 70).'Y')))
+                ->setGeneralCondition(true)
+                ->setAddress($randomAddress['address'])
+                ->setCity($randomAddress['city'])
+                ->setZipCode($randomAddress['zipCode'])
+                ->setCountry($randomAddress['country'])
+                ->setPlainPassword('xxx')
+                ->setUsername('user'.$i)
+                ->setEmail('user'.$i.'@gmail.com')
+                ->setEnabled(true);
+            $manager->persist($user);
+            $this->setReference('user-'.$i, $user);
+        }
 
         for ($i = 11; $i <= 20; $i++) {
             $randomAddress = $this->address[rand(0, 4)];
@@ -117,7 +140,7 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface
                 ->setPlainPassword('xxx')
                 ->setUsername('user'.$i)
                 ->setEmail('user'.$i.'@gmail.com')
-                ->addRole('ROLE_ADMIN')
+                ->addRole(User::USER_ROLE_BEATMAKER)
                 ->setEnabled(true);
             $manager->persist($user);
             $this->setReference('user-'.$i, $user);
@@ -141,6 +164,7 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface
                 ->setPlainPassword('xxx')
                 ->setUsername('user'.$i)
                 ->setEmail('user'.$i.'@gmail.com')
+                ->addRole(User::USER_ROLE_RAPPER)
                 ->setEnabled(true);
             $manager->persist($user);
             $this->setReference('user-'.$i, $user);

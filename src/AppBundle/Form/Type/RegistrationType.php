@@ -11,6 +11,8 @@
 
 namespace AppBundle\Form\Type;
 
+use Symfony\Component\OptionsResolver\OptionsResolver;
+
 /**
  * Class RegistrationType
  */
@@ -38,5 +40,16 @@ class RegistrationType extends UserType
     public function getName()
     {
         return $this->getBlockPrefix();
+    }
+
+    /**
+     * @param OptionsResolver $resolver
+     */
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver->setDefaults([
+            'data_class' => 'AppBundle\Entity\User',
+            'isCreation' => true,
+        ]);
     }
 }

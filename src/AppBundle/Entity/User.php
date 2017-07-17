@@ -12,7 +12,6 @@
 namespace AppBundle\Entity;
 
 use AppBundle\Entity\Traits\TimeStampTrait;
-use Doctrine\Common\Collections\ArrayCollection;
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -29,6 +28,8 @@ class User extends BaseUser
 
     const USER_ROLE_SUPER_ADMIN = "ROLE_SUPER_ADMIN";
     const USER_ROLE_USER        = "ROLE_USER";
+    const USER_ROLE_BEATMAKER   = "ROLE_BEATMAKER";
+    const USER_ROLE_RAPPER      = "ROLE_RAPPER";
 
     const USER_CIVILITY_MAN   = "man";
     const USER_CIVILITY_WOMAN = "woman";
@@ -90,6 +91,7 @@ class User extends BaseUser
      * @ORM\Column(type="string", nullable=true)
      */
     protected $city;
+
     /**
      * @var string
      *
@@ -371,8 +373,8 @@ class User extends BaseUser
     public static function getAvailableCivilities()
     {
         return [
-            'app.civility.man'   => self::USER_CIVILITY_MAN,
-            'app.civility.woman' => self::USER_CIVILITY_WOMAN,
+            'common.civility.man'   => self::USER_CIVILITY_MAN,
+            'common.civility.woman' => self::USER_CIVILITY_WOMAN,
         ];
     }
 
@@ -382,8 +384,22 @@ class User extends BaseUser
     public static function getAvailableRoles()
     {
         return [
-            'admin.role.ROLE_SUPER_ADMIN' => self::USER_ROLE_SUPER_ADMIN,
-            'admin.role.ROLE_USER'        => self::USER_ROLE_USER,
+            'common.role.ROLE_BEATMAKER' => self::USER_ROLE_BEATMAKER,
+            'common.role.ROLE_RAPPER'    => self::USER_ROLE_RAPPER,
+            'common.role.ROLE_USER'      => self::USER_ROLE_USER,
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    public static function getAvailableAdminRoles()
+    {
+        return [
+            'common.role.ROLE_SUPER_ADMIN' => self::USER_ROLE_SUPER_ADMIN,
+            'common.role.ROLE_BEATMAKER'   => self::USER_ROLE_BEATMAKER,
+            'common.role.ROLE_RAPPER'      => self::USER_ROLE_RAPPER,
+            'common.role.ROLE_USER'        => self::USER_ROLE_USER,
         ];
     }
 }

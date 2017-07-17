@@ -42,6 +42,8 @@
         <exec command="php bin/console doctrine:schema:update --force -e=prod" passthru="true"/>
         <echo message="Load fixtures..."/>
         <exec command="php bin/console doctrine:fixtures:load -e=prod --no-interaction" passthru="true" checkreturn="true"/>
+        <echo message="Load Translation..."/>
+        <exec command="php bin/console lexik:translations:import -e=prod" passthru="true" checkreturn="true"/>
         <echo message="Test..."/>
         <exec command="php bin/console doctrine:schema:validate -e=prod" passthru="true" checkreturn="true"/>
         <echo message="Disable index..."/>
@@ -65,6 +67,8 @@
         <exec command="php bin/console doctrine:schema:update --force" passthru="true"/>
         <echo message="Load fixtures..."/>
         <exec command="php bin/console doctrine:fixtures:load --no-interaction" passthru="true" checkreturn="true"/>
+        <echo message="Load Translation..."/>
+        <exec command="php bin/console lexik:translations:import" passthru="true" checkreturn="true"/>
         <echo message="Test..."/>
         <exec command="php bin/console security:check" passthru="true" checkreturn="true"/>
         <exec command="php bin/console doctrine:schema:validate" passthru="true" checkreturn="true"/>

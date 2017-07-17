@@ -1,0 +1,26 @@
+form:
+    user:
+        last_name:
+            not_null: Veuillez saisir votre nom
+        first_name:
+            not_null: Veuillez saisir votre prénom
+        phone:
+            regex: >
+                Ce numéro de téléphone doit faire extacement 10 chiffres (0612345678)
+        phone:
+            regex: >
+                Ce numéro de téléphone doit faire extacement 5 chiffres (59700)
+        birthday_date:
+            date: Veuillez saisir une date d'anniversaire avec le bon format
+            lower: Veuillez saisir une date d'anniversaire inférieure à aujourd'hui
+        general_condition:
+            not_null: Vous devez obligatoirement accepté les conditions générales d'utilisation et de vente du site
+        birthday_date:
+            lower: Votre date de naissance doit être inférieur à aujourd'hui
+    enabled:
+        not_null: Veuillez choisir si vous activer ou non cet élément
+    page:
+        title:
+            not_null: Veuillez saisir le titre de la page
+        content:
+            not_null: Veuillez saisir le contenu de la page

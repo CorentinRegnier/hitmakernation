@@ -33,6 +33,14 @@ common:
         facebook: Facebook
         twitter: Twitter
         youtube: Youtube
+    role:
+        ROLE_SUPER_ADMIN: Administrateur
+        ROLE_BEATMAKER: Beatmaker
+        ROLE_RAPPER: Rappeur
+        ROLE_USER: Utilisateur
+    civility:
+        man: Monsieur
+        woman: Madame
 
 app:
     menu:
@@ -41,6 +49,7 @@ app:
         register: Inscription
         logout: Déconnexion
         account: Mon compte
+        admin: Accès admin
     user:
         login:
             title: Connexion
@@ -74,18 +83,27 @@ app:
                 button: Modifier
             edit:
                 title: Édition du profil
-    civility:
-        man: Monsieur
-        woman: Madame
+    form:
+        registration:
+            gender: Genre
+            last_name: Nom
+            first_name: Prénom
+            birthday: Date de naissance
+            address: Adresse
+            zip_code: Code postal
+            city: Ville
+            country: Pays
+            phone: Téléphone
+            general_condition: J'accepte les conditions général de vente
     email:
         layout:
-            title: Valepimmo
+            title: HitMakerNation
             contact: Si vous avez des questions ou pour tout autre renseignement, n’hésitez pas à nous contacter directement.
             thanks: "Merci d’avance,"
-            service_customer: Le service client Valepimmo
-            name: Valepimmo
+            service_customer: Le service client HitMakerNation
+            name: HitMakerNation
             right: Tous droits réservés
-            info_contact: "1 sente bonnière, Nanteuil Le Haudouin - 60440 BerguesTél : 06 99 49 63 72"
+            info_contact: "1 sente bonnière, Nanteuil Le Haudouin - 60440 Tél : 06 99 49 63 72"
         resetting:
             subject: 'Réinitialisation de votre mot de passe'
             message: |
@@ -165,10 +183,6 @@ admin:
             content: Contenu
             meta_title: Méta titre
             meta_description: Méta description
-    role:
-        ROLE_SUPER_ADMIN: Administrateur
-        ROLE_USER: Utilisateur
-
 
 flashes:
     admin:

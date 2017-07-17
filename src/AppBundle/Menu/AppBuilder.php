@@ -67,7 +67,7 @@ class AppBuilder extends BaseBuilder
 
         // Profile
         if (strpos($routeName, 'fos_user_profile') === 0) {
-            $this->addItem($menu, 'app.user.registration.title', 'fos_user_registration_register');
+            $this->addItem($menu, 'app.user.profile.edit.title', 'fos_user_registration_register');
         }
 
         return $menu;
