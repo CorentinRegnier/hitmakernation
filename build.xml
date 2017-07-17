@@ -33,8 +33,7 @@
         <exec command="git pull origin master" passthru="true" checkreturn="true"/>
         <exec command="rm -rf var/cache/*" passthru="true" checkreturn="true"/>
         <echo message="Composer install..."/>
-        <exec command="SYMFONY_ENV=prod composer install --no-dev --optimize-autoloader" passthru="true"
-              checkreturn="true"/>
+        <exec command="SYMFONY_ENV=prod composer install --no-dev --optimize-autoloader" passthru="true" checkreturn="true"/>
         <echo message="Clear cache..."/>
         <exec command="rm -rf var/cache/*" passthru="true" checkreturn="true"/>
         <echo message="Remove uploads..."/>
@@ -42,8 +41,7 @@
         <echo message="Reset database..."/>
         <exec command="php bin/console doctrine:schema:update --force -e=prod" passthru="true"/>
         <echo message="Load fixtures..."/>
-        <exec command="php bin/console doctrine:fixtures:load -e=prod --no-interaction" passthru="true"
-              checkreturn="true"/>
+        <exec command="php bin/console doctrine:fixtures:load -e=prod --no-interaction" passthru="true" checkreturn="true"/>
         <echo message="Test..."/>
         <exec command="php bin/console doctrine:schema:validate -e=prod" passthru="true" checkreturn="true"/>
         <echo message="Disable index..."/>
@@ -73,7 +71,6 @@
     </target>
 
     <target name="remote:update:preprod" description="Remotely update the preprod">
-        <exec command="ssh hitmakernation@151.80.43.132 'cd site; vendor/bin/phing update:preprod'" passthru="true"
-              checkreturn="true"/>
+        <exec command="ssh hitmakernation@151.80.43.132 'cd site; vendor/bin/phing update:preprod'" passthru="true" checkreturn="true"/>
     </target>
 </project>
