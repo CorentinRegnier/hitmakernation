@@ -11,6 +11,7 @@
 
 namespace AppBundle\Menu;
 
+use AppBundle\Entity\Page;
 use Knp\Menu\FactoryInterface;
 use Knp\Menu\ItemInterface;
 use AgileAdminBundle\Menu\Builder as BaseBuilder;
@@ -68,6 +69,16 @@ class AppBuilder extends BaseBuilder
         // Profile
         if (strpos($routeName, 'fos_user_profile') === 0) {
             $this->addItem($menu, 'app.user.profile.edit.title', 'fos_user_registration_register');
+        }
+
+        if (strpos($routeName, 'page_show') === 0) {
+            /** @var Page[]|array $pages */
+            $pages = $this->container->get('doctrine.orm.entity_manager')->getRepository('AppBundle:Page')->findAll();
+            foreach ($pages as $page) {
+                if ($request->get('slug') === $page->getSlug()) {
+                    $this->addItem($menu, $page->getTitle(), 'page_show', null, ['slug' => $page->getSlug()]);
+                }
+            }
         }
 
         return $menu;
