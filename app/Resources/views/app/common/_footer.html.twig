@@ -31,7 +31,7 @@
         <div id="bottom-sidebar">
             <div class="wrapper">
                 <div class="row">
-                    <div class="col-md-4 col-sm-4">
+                    <div class="col-sm-4">
                         <div id="text-3" class="widget widget_text">
                             <div class="textwidget"><p>Proin eu sapien non tortor mattis auctor ac sit amet justo.
                                     Aliquam
@@ -48,7 +48,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4 col-sm-4">
+                    <div class="col-sm-4">
                         <div id="kopa-twitter-widget-1" class="widget kopa-twitter-widget">
                             <h2 class="widget-title widget-title-s1">Twitter</h2>
                             <ul class="clearfix">
@@ -92,6 +92,13 @@
                                 </li>
                             </ul>
                         </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <ul class="list-unstyled">
+                            {% for page in get_pages() %}
+                                <li><a href="{{ path('page_show', {'slug': page.slug}) }}">{{ page.title }}</a></li>
+                            {% endfor %}
+                        </ul>
                     </div>
                 </div>
             </div>

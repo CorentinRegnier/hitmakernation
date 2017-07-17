@@ -16,3 +16,10 @@ services:
         tags:
             - { name: twig.extension, alias: twig_extension_html }
 
+    app.extension.page:
+        class: AppBundle\Twig\PageExtension
+        arguments:
+            - '@doctrine.orm.entity_manager'
+        tags:
+            - { name: twig.extension }
+
