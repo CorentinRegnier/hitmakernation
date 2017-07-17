@@ -54,6 +54,9 @@
                 {% endblock container_before %}
                 {% block container %}
                     <div class="wrapper clearfix">
+                        {% block flash_message %}
+                            {% include 'app/common/_flash.html.twig' %}
+                        {% endblock flash_message %}
                         <section class="elements-box">
                             {% block content %}
                             {% endblock %}

@@ -1,8 +1,9 @@
 {% extends "app/form.html.twig" %}
 
+{% block page_title %}{{ 'app.user.resetting.title'|trans }}{% endblock %}
+
 {% block content %}
     {{ form_start(form, { 'action': path('fos_user_resetting_reset', {'token': token}), 'attr': { 'class': 'fos_user_resetting_reset' } }) }}
-    <h2>{{ 'app.user.resetting.title'|trans }}</h2>
     <div>
         {{ form_widget(form) }}
     </div>

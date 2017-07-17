@@ -64,8 +64,11 @@ fos_user_change_password:
     path: /changer-mot-de-passe
 
 fos_user_profile_show:
-    defaults:  { _controller: FOSUserBundle:Profile:show, _method: POST }
     path: /profile
+    defaults:
+        _controller: FrameworkBundle:Redirect:redirect
+        route: fos_user_profile_edit
+        permanent: true
 
 lexik_translation_edition:
     resource: "@LexikTranslationBundle/Resources/config/routing.yml"

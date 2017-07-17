@@ -1,7 +1,7 @@
 {% extends "app/base.html.twig" %}
 
+{% block page_title %}{{ 'app.user.register.title'|trans }}{% endblock %}
 {% block content %}
-    <h2 class="text-center">{{ 'app.user.register.title'|trans }}</h2>
     <div>
         <p>{{ 'app.user.register.confirmed'|trans({'%username%': user.username}) }}</p>
         {% if targetUrl %}

@@ -1,1 +1,11 @@
 services:
+    app.form.registration:
+        class: AppBundle\Form\Type\RegistrationType
+        arguments: ['@security.authorization_checker']
+        tags:
+            - { name: form.type, alias: app_user_registration }
+    app.form.profile:
+        class: AppBundle\Form\Type\ProfileFormType
+        arguments: ['@security.authorization_checker']
+        tags:
+            - { name: form.type, alias: app_user_profile }
