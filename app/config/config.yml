@@ -11,7 +11,7 @@ imports:
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: fr
-    list_locales: [en, fr]
+    list_locales: [fr]
 
 framework:
     #esi:             ~
