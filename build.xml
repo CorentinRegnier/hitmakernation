@@ -25,6 +25,7 @@
         <exec command="crontab ${project.basedir}/app/cache/cron/${env}" logoutput="true"/>
         <exec command="rm ${project.basedir}/app/cache/cron/${env}" logoutput="true"/>
     </target>
+
     <target name="update:preprod" description="Update project on preprod">
         <property name="env" value="prod" override="true"/>
 
@@ -32,7 +33,8 @@
         <exec command="git pull origin master" passthru="true" checkreturn="true"/>
         <exec command="rm -rf var/cache/*" passthru="true" checkreturn="true"/>
         <echo message="Composer install..."/>
-        <exec command="SYMFONY_ENV=prod composer install --no-dev --optimize-autoloader" passthru="true" checkreturn="true"/>
+        <exec command="SYMFONY_ENV=prod composer install --no-dev --optimize-autoloader" passthru="true"
+              checkreturn="true"/>
         <echo message="Clear cache..."/>
         <exec command="rm -rf var/cache/*" passthru="true" checkreturn="true"/>
         <echo message="Remove uploads..."/>
@@ -40,9 +42,10 @@
         <echo message="Reset database..."/>
         <exec command="php bin/console doctrine:schema:update --force -e=prod" passthru="true"/>
         <echo message="Load fixtures..."/>
-        <exec command="php bin/console doctrine:fixtures:load -e=prod --no-interaction" passthru="true" checkreturn="true"/>
+        <exec command="php bin/console doctrine:fixtures:load -e=prod --no-interaction" passthru="true"
+              checkreturn="true"/>
         <echo message="Test..."/>
-        <exec command="php bin/console doctrine:schema:validate -e=prod" passthru="true" checkreturn="true" />
+        <exec command="php bin/console doctrine:schema:validate -e=prod" passthru="true" checkreturn="true"/>
         <echo message="Disable index..."/>
         <exec command="echo 'User-agent: *${line.separator}Disallow: /' > web/robots.txt" passthru="true"/>
     </target>
@@ -64,32 +67,13 @@
         <exec command="php bin/console doctrine:schema:update --force" passthru="true"/>
         <echo message="Load fixtures..."/>
         <exec command="php bin/console doctrine:fixtures:load --no-interaction" passthru="true" checkreturn="true"/>
-        <echo message="Restart elasticsearch..."/>
-        <exec command="php bin/console fos:elastica:reset" passthru="true" checkreturn="true"/>
-        <exec command="php bin/console fos:elastica:populate" passthru="true" checkreturn="true"/>
         <echo message="Test..."/>
-        <exec command="php bin/console security:check" passthru="true"  checkreturn="true"/>
-        <exec command="php bin/console doctrine:schema:validate" passthru="true" checkreturn="true" />
+        <exec command="php bin/console security:check" passthru="true" checkreturn="true"/>
+        <exec command="php bin/console doctrine:schema:validate" passthru="true" checkreturn="true"/>
     </target>
 
     <target name="remote:update:preprod" description="Remotely update the preprod">
         <exec command="ssh hitmakernation@151.80.43.132 'cd site; vendor/bin/phing update:preprod'" passthru="true"
               checkreturn="true"/>
-    </target>
-
-    <target name="tests:valid"
-            description="Check security and schema database validation">
-        <exec command="vendor/bin/phing tests:schema-validate; vendor/bin/phing tests:security_check" checkreturn="true"
-              logoutput="true"/>
-    </target>
-
-    <target name="tests:schema-validate"
-            description="Validate that the database schema is in sync with the entity classes">
-        <exec command="php bin/console doctrine:schema:validate" checkreturn="true" logoutput="true"/>
-    </target>
-
-    <target name="tests:security_check"
-            description="Check for Known Security Vulnerabilities in Your Dependencies">
-        <exec command="php bin/console security:check" checkreturn="true" logoutput="true"/>
     </target>
 </project>
