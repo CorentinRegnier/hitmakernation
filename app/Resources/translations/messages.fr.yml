@@ -45,6 +45,7 @@ common:
 app:
     menu:
         homepage: Accueil
+        admin_homepage: Accès admin
         login: Connexion
         register: Inscription
         logout: Déconnexion

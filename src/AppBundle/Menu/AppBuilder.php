@@ -31,10 +31,11 @@ class AppBuilder extends BaseBuilder
     public function mainMenu(FactoryInterface $factory, $options)
     {
         $menu = $factory->createItem('root');
-        $this->addItem($menu, 'Accueil', 'homepage');
+        $this->addItem($menu, 'app.menu.homepage', 'homepage');
         $this->addItem($menu, 'Test', 'homepage');
         $this->addItem($menu, 'Test2', 'homepage');
         $this->addItem($menu, 'Test3', 'homepage');
+        $this->addItem($menu, 'app.menu.admin_homepage', 'admin_homepage');
 
         return $menu;
     }
